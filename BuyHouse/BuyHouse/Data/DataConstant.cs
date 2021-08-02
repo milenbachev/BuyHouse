@@ -32,6 +32,10 @@
 
         public class Property 
         {
+            public const int AreaMinValue = 2;
+            public const int AreaMaxValue = int.MaxValue;
+            public const int PriceMinValue = 1;
+            public const int PriceMaxValue = int.MaxValue;
             public const int DescriptionMinLength = 5;
             public const int DescriptionMaxLength = 200;
         }

@@ -9,8 +9,8 @@
     {
         public City() 
         {
-            this.Properties = new HashSet<Property>();
             this.Agents = new HashSet<Agent>();
+            this.Properties = new HashSet<Property>();
         }
 
         public int Id { get; set; }
@@ -19,8 +19,8 @@
         [MaxLength(NameMaxLength)]
         public string Name { get; set; }
 
-        public IEnumerable<Property> Properties { get; set; }
-
         public IEnumerable<Agent> Agents { get; set; }
+
+        public IEnumerable<Property> Properties { get; set; }
     }
 }

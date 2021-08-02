@@ -2,6 +2,7 @@ namespace BuyHouse
 {
     using BuyHouse.Data;
     using BuyHouse.Infrastructure;
+    using BuyHouse.Services.Properties;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.HttpsPolicy;
@@ -50,6 +51,8 @@ namespace BuyHouse
                 {
                     option.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
                 });
+
+            services.AddTransient<IPropertyService, PropertyService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
