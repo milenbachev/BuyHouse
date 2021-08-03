@@ -23,20 +23,23 @@
             int? agentId,
             int constructionId);
 
+        PropertyServiceQueryModel All(
+            string category,
+            string city,
+            string transaction,
+            string construction,
+            int curentPage,
+            int propertyPerPage);
 
         IEnumerable<PropertyCategoryServiceModel> AllCategory();
 
         IEnumerable<PropertyTransactionServiceModel> AllTransaction();
-
-        IEnumerable<PropertyCityServiceModel> AllCity();
 
         IEnumerable<PropertyConstructionServiceModel> AllConstruction();
 
         bool CategoryExist(int categoryId);
 
         bool TransactionExist(int transactionId);
-
-        bool CityExist(int cityId);
 
         bool ConstructionExist(int constructionId);
     }

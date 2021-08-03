@@ -29,6 +29,9 @@
         [Required]
         public string ImageUrl { get; set; }
 
+        [Required]
+        public string UserId { get; set; }
+
         public int CityId { get; set; }
 
         public City City { get; set; }

@@ -1,4 +1,7 @@
-﻿using BuyHouse.Models;
+﻿using BuyHouse.Data;
+using BuyHouse.Models;
+using BuyHouse.Models.Home;
+using BuyHouse.Services.Home;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,16 +14,18 @@ namespace BuyHouse.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IHomeService homeService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IHomeService homeService) 
         {
-            _logger = logger;
+            this.homeService = homeService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var total = this.homeService.GetCounts();
+
+            return this.View(total);
         }
 
         public IActionResult Privacy()
