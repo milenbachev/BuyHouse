@@ -31,14 +31,15 @@
         [Authorize]
         public IActionResult Create(AgentFormModel agent) 
         {
-            var userId = this.User.GetId();
 
-            var userIsAgent = agentService.IsAgent(userId);  
+            var userId = this.User.GetId();
+            var userIsAgent = agentService.IsAgent(userId);
 
             if (userIsAgent) 
             {
                 return BadRequest();
             }
+
             if (!this.cityService.CityExist(agent.CityId))
             {
                 this.ModelState.AddModelError(nameof(agent.CityId), "City does not exist");
@@ -56,7 +57,8 @@
                agent.PhoneNumber,
                agent.Description,
                agent.ImageUrl,
-               agent.CityId);
+               agent.CityId,
+               userId);
 
             return this.RedirectToAction("All", "Properties"); 
         }

@@ -2,17 +2,14 @@
 {
     using BuyHouse.Data;
     using BuyHouse.Data.Models;
-    using BuyHouse.Services.City;
     using System.Linq;
     public class AgentService : IAgentService
     {
         private readonly BuyHouseDbContext data;
-        private readonly ICityService cityService;
 
-        public AgentService(BuyHouseDbContext data, ICityService cityService) 
+        public AgentService(BuyHouseDbContext data) 
         {
             this.data = data;
-            this.cityService = cityService;
         }
 
         public int Create(
@@ -20,15 +17,18 @@
             string phoneNumber, 
             string description, 
             string imageUrl, 
-            int cityId)
+            int cityId,
+            string userId)
         {
+
             var agent = new Agent
             {
                 Name = name,
                 PhoneNumber = phoneNumber,
                 Description = description,
                 ImageUrl = imageUrl,
-                CityId = cityId
+                CityId = cityId,
+                UserId = userId
             };
 
             this.data.Agents.Add(agent);
