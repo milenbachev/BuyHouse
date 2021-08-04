@@ -136,6 +136,7 @@
                     Construction = x.Construction,
                     City = x.City,
                     Transaction = x.TypeOfTransaction
+                    
                 })
                 .ToList();
         }

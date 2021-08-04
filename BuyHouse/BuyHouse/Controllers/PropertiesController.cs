@@ -84,13 +84,13 @@
                 property.City,
                 property.Construction,
                 property.CurentPage,
-                AllPropertyModel.PropertyPerPage );
+                AllPropertyModel.PropertyPerPage);
 
             var propertiesCity = this.propertyService.AllCity();
             var propertyConstruction = this.propertyService.AllConstruction();
             var propertyTransaction = this.propertyService.AllTransaction();
 
-            property.TotalProperty = queryProperties.TotalProperties;
+            property.TotalProperties = queryProperties.TotalProperties;
             property.Cities = propertiesCity;
             property.Constructions = propertyConstruction;
             property.Transactions = propertyTransaction;

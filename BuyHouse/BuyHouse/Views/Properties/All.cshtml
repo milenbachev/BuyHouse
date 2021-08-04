@@ -59,20 +59,41 @@
         </div>
     }
 </div>
-    
 <hr/>
+
+@{ 
+    var previousPage = Model.CurentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage =(int)Math.Ceiling((double)Model.TotalProperties / AllPropertyModel.PropertyPerPage);
+
+}
 <nav aria-label="...">
     <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
         <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            <a class="btn btn-info @(Model.CurentPage == 1 ? "disabled" : string.Empty)"
+               asp-controller="Properties"
+               asp-action="All"
+               asp-route-curentPage="@previousPage"
+               asp-route-city="@Model.City"
+               asp-route-transaction="@Model.Transaction"
+               asp-route-construction="@Model.Construction">Previous</a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link">@Model.CurentPage<span class="sr-only">(current)</span></a>
+        </li>
+    
+        <li class="page-item">
+            <a class="btn btn-info @(Model.CurentPage == maxPage ? "disabled" : string.Empty)"
+               asp-controller="Properties"
+               asp-action="All"
+               asp-route-curentPage="@(Model.CurentPage + 1)"
+               asp-route-city="@Model.City"
+               asp-route-transaction="@Model.Transaction"
+               asp-route-construction="@Model.Construction">Next</a>
         </li>
     </ul>
 </nav>

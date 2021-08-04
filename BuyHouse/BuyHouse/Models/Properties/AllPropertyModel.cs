@@ -11,11 +11,9 @@
 
         public int CurentPage { get; set; } = 1;
 
-        public string Category { get; set; }
+        public int TotalProperties { get; set; }
 
         public string Transaction { get; set; }
-
-        public int TotalProperty { get; set; }
 
         public string City { get; set; }
 
@@ -26,8 +24,6 @@
         public IEnumerable<string> Cities { get; set; }
 
         public IEnumerable<string> Transactions { get; set; }
-
-        public Category Categories { get; set; }
 
         public IEnumerable<PropertyServiceListModel> Properties { get; set; }
     }
