@@ -10,6 +10,8 @@
             public const int PhoneNumberMaxLength = 20;
             public const int DescriptionMinLength = 10;
             public const int DescriptionMaxLength = 200;
+            public const int CityNameMinLength = 3;
+            public const int CityNameMaxLength = 30;
         }
 
         public class Category 
@@ -18,32 +20,25 @@
             public const int NameMaxLength = 30;
         }
 
-        public class City 
-        {
-            public const int NameMinLength = 2;
-            public const int NameMaxLength = 30;
-        }
-
-        public class Construction 
-        {
-            public const int NameMinLength = 2;
-            public const int NameMaxLength = 30;
-        }
-
         public class Property 
         {
+            public const int TitleMinLength = 5;
+            public const int TitleMaxLength = 30;
             public const int AreaMinValue = 2;
             public const int AreaMaxValue = int.MaxValue;
             public const int PriceMinValue = 1;
             public const int PriceMaxValue = int.MaxValue;
             public const int DescriptionMinLength = 5;
             public const int DescriptionMaxLength = 200;
+            public const int CityNameMinLength = 3;
+            public const int CityNameMaxLength = 30;
+            public const int ConstructionMinLength = 2;
+            public const int ConstructionMaxLength = 20;
+            public const int TypeOfTransactionMinLength = 2;
+            public const int TypeOfTransactionMaxLength = 30;
+            public const int YearMinValue = 1900;
+            public const int YearMaxValue = 2021;
         }
 
-        public class TypeOfTransaction 
-        {
-            public const int NameMinLength = 5;
-            public const int NameMaxLength = 30;
-        }
     }
 }

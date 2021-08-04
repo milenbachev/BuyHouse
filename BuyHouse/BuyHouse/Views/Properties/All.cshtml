@@ -1,6 +1,79 @@
 ﻿@model AllPropertyModel
 
 @{
-    ViewBag.Name = "All Property";
- }
+    ViewData["Title"] = "All Properties, Page";
+
+}
+
+<form method="get">
+    <div class="row mb-5">
+        <div class="form-group col-md-3">
+            <label asp-for="Transaction"></label>
+            <select asp-for="Transaction" class="form-control">
+                <option value="">All</option>
+
+                @foreach (var transaction in Model.Transactions)
+                {
+                    <option value="@transaction">@transaction</option>
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="City"></label>
+            <select asp-for="City" class="form-control">
+                <option value="">All</option>
+
+                @foreach (var city in Model.Cities)
+                {
+                    <option value="@city">@city</option>
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="Construction"></label>
+            <select asp-for="Construction" class="form-control">
+                <option value="">All</option>
+
+                @foreach (var construction in Model.Constructions)
+                {
+                    <option value="@construction">@construction</option>
+                }
+            </select>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary offset-10 mt-4" value="Serch">
+        </div>
+    </div>
+</form>
+<div class="row">
+    @foreach (var property in Model.Properties)
+    {
+        <div class="media col-md-4">
+            <img width="200" class="img-responsiv" src="@property.ImageUrl">
+            <div class="media-body">
+                <h5 class="mt-0">@property.Title</h5>
+                <h6 class="mt-0">@property.Price EUR</h6>
+                <h6 class="mt-0">@property.Area sq m</h6>
+                <h6 class="mt-0">@property.City</h6>
+            </div>
+        </div>
+    }
+</div>
+    
+<hr/>
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active">
+            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
 

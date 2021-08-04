@@ -18,9 +18,6 @@
 
             MigrateDatabase(services);
             SeedCategory(services);
-            SeedTransaction(services);
-            SeedCity(services);
-            SeedConstruction(services);
 
             return app;
         }
@@ -53,68 +50,6 @@
             });
 
             data.SaveChanges();
-        }
-
-        private static void SeedTransaction(IServiceProvider service) 
-        {
-            var data = service.GetRequiredService<BuyHouseDbContext>();
-
-            if (data.TypeOfTransactions.Any()) 
-            {
-                return;
-            }
-
-            data.TypeOfTransactions.AddRange(new[]
-            {
-                new TypeOfTransaction { Name = "For Sale"},
-                new TypeOfTransaction { Name = "Renting Out"},
-                new TypeOfTransaction {Name = "Buy"},
-                new TypeOfTransaction { Name = "Rent"}
-            });
-
-            data.SaveChanges();
-        }
-
-        private static void SeedCity(IServiceProvider service) 
-        {
-            var data = service.GetRequiredService<BuyHouseDbContext>();
-
-            if (data.Cities.Any()) 
-            {
-                return;
-            }
-
-            data.Cities.AddRange(new[]
-            {
-                new City { Name = "Sofia"},
-                new City { Name = "Plovdiv"},
-                new City { Name = "Varna"},
-                new City { Name = "Burgas"},
-                new City { Name = "BlagoevGrad"},
-                new City { Name = "Sandansky"}
-            });
-
-            data.SaveChanges();
-        }
-
-        private static void SeedConstruction(IServiceProvider service) 
-        {
-            var data = service.GetRequiredService<BuyHouseDbContext>();
-
-            if (data.Constructions.Any()) 
-            {
-                return;
-            }
-
-            data.Constructions.AddRange(new[]
-            {
-                new Construction { Name = "Panel"},
-                new Construction { Name = "Brick"},
-                new Construction { Name = "YTONG"},
-                new Construction { Name = "EPK"}
-            });
-
-            data.SaveChanges();
-        }
+        } 
     }
 }

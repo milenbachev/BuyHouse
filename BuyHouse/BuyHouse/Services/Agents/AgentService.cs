@@ -17,7 +17,7 @@
             string phoneNumber, 
             string description, 
             string imageUrl, 
-            int cityId,
+            string city,
             string userId)
         {
 
@@ -27,7 +27,7 @@
                 PhoneNumber = phoneNumber,
                 Description = description,
                 ImageUrl = imageUrl,
-                CityId = cityId,
+                City = city,
                 UserId = userId
             };
 

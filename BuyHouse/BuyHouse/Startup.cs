@@ -3,7 +3,6 @@ namespace BuyHouse
     using BuyHouse.Data;
     using BuyHouse.Infrastructure;
     using BuyHouse.Services.Agents;
-    using BuyHouse.Services.City;
     using BuyHouse.Services.Home;
     using BuyHouse.Services.Properties;
     using Microsoft.AspNetCore.Builder;
@@ -56,7 +55,6 @@ namespace BuyHouse
                 });
 
             services.AddTransient<IHomeService, HomeService>();
-            services.AddTransient<ICityService, CityService>();
             services.AddTransient<IAgentService, AgentService>();
             services.AddTransient<IPropertyService, PropertyService>();
         }

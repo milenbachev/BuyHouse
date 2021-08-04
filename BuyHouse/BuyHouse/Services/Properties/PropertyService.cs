@@ -18,7 +18,9 @@
         }
 
         public int Create(
-            int area, 
+            int area,
+            string title,
+            int year,
             int? floor, 
             int? floors, 
             int? bedRoom, 
@@ -27,14 +29,17 @@
             string imageUrl, 
             string description, 
             int categoryId, 
-            int typeOfTransactionId, 
-            int cityId, 
-            int? agentId, 
-            int constructionId)
+            string typeOfTransaction, 
+            string city,
+            string construction,
+            int? agentId)
+
         {
             var property = new Property
             {
                 Area = area,
+                Title = title,
+                Year = year,
                 Floor = floor,
                 Floors = floors,
                 BedRoom = bedRoom,
@@ -42,11 +47,12 @@
                 Price = price,
                 ImageUrl = imageUrl,
                 Description = description,
+                TypeOfTransaction = typeOfTransaction,
+                Construction = construction,
+                City = city,
                 CategotyId = categoryId,
-                TypeOfTransactionId = typeOfTransactionId,
-                CityId = cityId,
                 AgentId = agentId,
-                ConstructionId = constructionId
+
             };
 
             this.data.Properties.Add(property);
@@ -56,42 +62,35 @@
         }
 
         public PropertyServiceQueryModel All(
-            string category,
-            string city, 
-            string transaction, 
+            string transaction,
+            string city,
             string construction, 
             int curentPage, 
             int propertyPerPage)
         {
             var propertyQuery = this.data.Properties.AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(category)) 
+            if (!string.IsNullOrWhiteSpace(city))
             {
                 propertyQuery = propertyQuery
-                    .Where(x => x.Category.Name == category);
-            }
-            if (!string.IsNullOrWhiteSpace(city)) 
+                    .Where(x => x.City == city);
+            };
+            if (!string.IsNullOrWhiteSpace(construction))
             {
                 propertyQuery = propertyQuery
-                    .Where(x => x.City.Name == city);
-            }
-            if (!string.IsNullOrWhiteSpace(transaction)) 
+                    .Where(x => x.Construction == construction);
+            };
+            if (!string.IsNullOrWhiteSpace(transaction))
             {
                 propertyQuery = propertyQuery
-                    .Where(x => x.TypeOfTransaction.Name == transaction);
-            }
-            if (!string.IsNullOrWhiteSpace(construction)) 
-            {
-                propertyQuery = propertyQuery
-                    .Where(x => x.Construction.Name == construction);
-            }
+                    .Where(x => x.TypeOfTransaction == transaction);
+            };
 
             var properties = this.GetProperties(propertyQuery
                 .Skip((curentPage - 1) * propertyPerPage)
                 .Take(propertyPerPage));
 
             var totalProperty = propertyQuery.Count();
-
 
             return new PropertyServiceQueryModel
             {
@@ -114,29 +113,6 @@
                 .ToList();
         }
 
-        public IEnumerable<PropertyTransactionServiceModel> AllTransaction()
-        {
-            return this.data
-                .TypeOfTransactions
-                .Select(x => new PropertyTransactionServiceModel
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                })
-                .ToList();
-        }
-
-        public IEnumerable<PropertyConstructionServiceModel> AllConstruction()
-        {
-            return this.data
-                .Constructions
-                .Select(x => new PropertyConstructionServiceModel
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                })
-                .ToList();
-        }
 
         public bool CategoryExist(int categoryId)
         {
@@ -144,34 +120,57 @@
                 .Categories
                 .Any(x => x.Id == categoryId);
         }
-
-        public bool TransactionExist(int transactionId)
-        {
-            return this.data
-                .TypeOfTransactions
-                .Any(x => x.Id == transactionId);
-        }
-
-        public bool ConstructionExist(int constructionId)
-        {
-            return this.data
-                .Constructions
-                .Any(x => x.Id == constructionId);
-        }
-
-        private IEnumerable<PropertyServiceModel> GetProperties(IQueryable<Property> properties) 
+        private IEnumerable<PropertyServiceListModel> GetProperties(IQueryable<Property> properties) 
         {
             return properties
-                .Select(x => new PropertyServiceModel
+                .Select(x => new PropertyServiceListModel
                 {
                     Id = x.Id,
-                    BedRoom = x.BedRoom,
-                    Floor = x.Floor,
-                    Floors = x.Floors,
+                    Title = x.Title,
+                    Year = x.Year,
+                    Price = x.Price,
                     ImageUrl = x.ImageUrl,
-                    Contruction = x.Construction.Name
+                    Area = x.Area,
+                    CategoryId = x.CategotyId,
+                    CategoryName = x.Category.Name,
+                    Construction = x.Construction,
+                    City = x.City,
+                    Transaction = x.TypeOfTransaction
                 })
                 .ToList();
+        }
+
+        public IEnumerable<string> AllCity()
+        {
+            var cities = this.data
+                .Properties
+                .Select(x => x.City)
+                .Distinct()
+                .ToList();
+
+            return cities;
+        }
+
+        public IEnumerable<string> AllConstruction()
+        {
+            var constructions = this.data
+                .Properties
+                .Select(x => x.Construction)
+                .Distinct()
+                .ToList();
+
+            return constructions;
+        }
+
+        public IEnumerable<string> AllTransaction()
+        {
+            var transacions = this.data
+                .Properties
+                .Select(x => x.TypeOfTransaction)
+                .Distinct()
+                .ToList();
+
+            return transacions;
         }
     }
 }

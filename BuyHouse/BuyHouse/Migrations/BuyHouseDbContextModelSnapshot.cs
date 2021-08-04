@@ -26,8 +26,10 @@ namespace BuyHouse.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -54,8 +56,6 @@ namespace BuyHouse.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CityId");
-
                     b.ToTable("Agents");
                 });
 
@@ -74,40 +74,6 @@ namespace BuyHouse.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("BuyHouse.Data.Models.City", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cities");
-                });
-
-            modelBuilder.Entity("BuyHouse.Data.Models.Construction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Constructions");
                 });
 
             modelBuilder.Entity("BuyHouse.Data.Models.Property", b =>
@@ -132,11 +98,15 @@ namespace BuyHouse.Migrations
                     b.Property<int>("CategotyId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("ConstructionId")
-                        .HasColumnType("int");
+                    b.Property<string>("Construction")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -156,7 +126,17 @@ namespace BuyHouse.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("TypeOfTransactionId")
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("TypeOfTransaction")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -165,30 +145,7 @@ namespace BuyHouse.Migrations
 
                     b.HasIndex("CategotyId");
 
-                    b.HasIndex("CityId");
-
-                    b.HasIndex("ConstructionId");
-
-                    b.HasIndex("TypeOfTransactionId");
-
                     b.ToTable("Properties");
-                });
-
-            modelBuilder.Entity("BuyHouse.Data.Models.TypeOfTransaction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypeOfTransactions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -391,17 +348,6 @@ namespace BuyHouse.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("BuyHouse.Data.Models.Agent", b =>
-                {
-                    b.HasOne("BuyHouse.Data.Models.City", "City")
-                        .WithMany("Agents")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("City");
-                });
-
             modelBuilder.Entity("BuyHouse.Data.Models.Property", b =>
                 {
                     b.HasOne("BuyHouse.Data.Models.Agent", "Agent")
@@ -415,33 +361,9 @@ namespace BuyHouse.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BuyHouse.Data.Models.City", "City")
-                        .WithMany("Properties")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BuyHouse.Data.Models.Construction", "Construction")
-                        .WithMany("Properties")
-                        .HasForeignKey("ConstructionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BuyHouse.Data.Models.TypeOfTransaction", "TypeOfTransaction")
-                        .WithMany("Properties")
-                        .HasForeignKey("TypeOfTransactionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Agent");
 
                     b.Navigation("Category");
-
-                    b.Navigation("City");
-
-                    b.Navigation("Construction");
-
-                    b.Navigation("TypeOfTransaction");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -501,23 +423,6 @@ namespace BuyHouse.Migrations
                 });
 
             modelBuilder.Entity("BuyHouse.Data.Models.Category", b =>
-                {
-                    b.Navigation("Properties");
-                });
-
-            modelBuilder.Entity("BuyHouse.Data.Models.City", b =>
-                {
-                    b.Navigation("Agents");
-
-                    b.Navigation("Properties");
-                });
-
-            modelBuilder.Entity("BuyHouse.Data.Models.Construction", b =>
-                {
-                    b.Navigation("Properties");
-                });
-
-            modelBuilder.Entity("BuyHouse.Data.Models.TypeOfTransaction", b =>
                 {
                     b.Navigation("Properties");
                 });

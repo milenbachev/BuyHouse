@@ -3,28 +3,22 @@
     using BuyHouse.Infrastructure;
     using BuyHouse.Models.Agents;
     using BuyHouse.Services.Agents;
-    using BuyHouse.Services.City;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class AgentsController : Controller
     {
         private readonly IAgentService agentService;
-        private readonly ICityService cityService;
 
-        public AgentsController(IAgentService agentService, ICityService cityService) 
+        public AgentsController(IAgentService agentService) 
         {
             this.agentService = agentService;
-            this.cityService = cityService;
         }
 
         [Authorize]
         public IActionResult Create() 
         {
-            return this.View(new AgentFormModel
-            {
-                Cities = this.cityService.AllCity()
-            }) ;
+            return this.View();
         }
 
         [HttpPost]
@@ -40,15 +34,8 @@
                 return BadRequest();
             }
 
-            if (!this.cityService.CityExist(agent.CityId))
-            {
-                this.ModelState.AddModelError(nameof(agent.CityId), "City does not exist");
-            }
-
             if (!ModelState.IsValid) 
             {
-                agent.Cities = this.cityService.AllCity();
-
                 return View(agent);
             }
 
@@ -57,7 +44,7 @@
                agent.PhoneNumber,
                agent.Description,
                agent.ImageUrl,
-               agent.CityId,
+               agent.City,
                userId);
 
             return this.RedirectToAction("All", "Properties"); 

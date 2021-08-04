@@ -12,6 +12,13 @@
         [Range(AreaMinValue, AreaMaxValue)]
         public int Area { get; set; }
 
+        [Required]
+        [StringLength(TitleMaxLength, MinimumLength = TitleMinLength)]
+        public string Title { get; set; }
+
+        [Range(YearMinValue, YearMaxValue)]
+        public int Year { get; set; }
+
         public int? Floor { get; set; }
 
         public int? Floors { get; set; }
@@ -35,25 +42,25 @@
         [Display(Name = "Category")]
         public int CategotyId { get; set; }
 
+        [Required]
+        [StringLength(CityNameMaxLength, MinimumLength = CityNameMinLength)]
         [Display(Name = "City")]
-        public int CityId { get; set; }
+        public string City { get; set; }
 
+        [Required]
+        [StringLength(ConstructionMaxLength, MinimumLength = ConstructionMinLength)]
         [Display(Name = "Construction")]
-        public int ConstructionId { get; set; }
+        public string Construction { get; set; }
 
         [Display(Name = "Agent")]
         public int? AgentId { get; set; }
 
+        [Required]
+        [StringLength(TypeOfTransactionMaxLength, MinimumLength = TypeOfTransactionMinLength)]
         [Display(Name = "Type of Transaction")]
-        public int TypeOfTransactionId { get; set; }
+        public string TypeOfTransaction { get; set; }
 
         public IEnumerable<PropertyCategoryServiceModel> Categories { get; set; }
-
-        public IEnumerable<PropertyTransactionServiceModel> Transactions { get; set; }
-
-        public IEnumerable<PropertyCityServiceModel> Cities { get; set; }
-
-        public IEnumerable<PropertyConstructionServiceModel> Constructions { get; set; }
 
     }
 }

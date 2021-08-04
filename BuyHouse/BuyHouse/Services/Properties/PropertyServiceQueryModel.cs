@@ -9,6 +9,6 @@
 
         public int TotalProperties { get; set; }
 
-        public IEnumerable<PropertyServiceModel> Properties { get; set; }
+        public IEnumerable<PropertyServiceListModel> Properties { get; set; }
     }
 }

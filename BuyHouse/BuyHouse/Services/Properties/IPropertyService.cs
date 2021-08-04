@@ -1,15 +1,13 @@
 ﻿namespace BuyHouse.Services.Properties
 {
-    using BuyHouse.Services.Properties;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public interface IPropertyService
     {
         int Create(
             int area,
+            string title,
+            int year,
             int? floor,
             int? floors,
             int? bedRoom,
@@ -18,29 +16,26 @@
             string imageUrl,
             string description,
             int categoryId,
-            int typeOfTransactionId,
-            int cityId,
-            int? agentId,
-            int constructionId);
+            string typeOfTransaction,
+            string city,
+            string construction,
+            int? agentId);
 
         PropertyServiceQueryModel All(
-            string category,
-            string city,
             string transaction,
+            string city,
             string construction,
-            int curentPage,
+            int curentPage, 
             int propertyPerPage);
 
         IEnumerable<PropertyCategoryServiceModel> AllCategory();
 
-        IEnumerable<PropertyTransactionServiceModel> AllTransaction();
-
-        IEnumerable<PropertyConstructionServiceModel> AllConstruction();
-
         bool CategoryExist(int categoryId);
 
-        bool TransactionExist(int transactionId);
+        IEnumerable<string> AllCity();
 
-        bool ConstructionExist(int constructionId);
+        IEnumerable<string> AllConstruction();
+
+        IEnumerable<string> AllTransaction();
     }
 }

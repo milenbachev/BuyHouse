@@ -3,10 +3,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BuyHouse.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitailCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Agents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Agents", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -57,45 +75,6 @@ namespace BuyHouse.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cities",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cities", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Constructions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Constructions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TypeOfTransactions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TypeOfTransactions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,47 +184,26 @@ namespace BuyHouse.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Agents",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CityId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Agents", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Agents_Cities_CityId",
-                        column: x => x.CityId,
-                        principalTable: "Cities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Properties",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Area = table.Column<int>(type: "int", nullable: false),
                     Floor = table.Column<int>(type: "int", nullable: true),
                     Floors = table.Column<int>(type: "int", nullable: true),
                     BedRoom = table.Column<int>(type: "int", nullable: true),
                     Bath = table.Column<int>(type: "int", nullable: true),
                     Price = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CategotyId = table.Column<int>(type: "int", nullable: false),
-                    CityId = table.Column<int>(type: "int", nullable: false),
-                    ConstructionId = table.Column<int>(type: "int", nullable: false),
-                    AgentId = table.Column<int>(type: "int", nullable: false),
-                    TypeOfTransactionId = table.Column<int>(type: "int", nullable: false)
+                    City = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Construction = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    AgentId = table.Column<int>(type: "int", nullable: true),
+                    TypeOfTransaction = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -262,30 +220,7 @@ namespace BuyHouse.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Properties_Cities_CityId",
-                        column: x => x.CityId,
-                        principalTable: "Cities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Properties_Constructions_ConstructionId",
-                        column: x => x.ConstructionId,
-                        principalTable: "Constructions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Properties_TypeOfTransactions_TypeOfTransactionId",
-                        column: x => x.TypeOfTransactionId,
-                        principalTable: "TypeOfTransactions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Agents_CityId",
-                table: "Agents",
-                column: "CityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -335,21 +270,6 @@ namespace BuyHouse.Migrations
                 name: "IX_Properties_CategotyId",
                 table: "Properties",
                 column: "CategotyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Properties_CityId",
-                table: "Properties",
-                column: "CityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Properties_ConstructionId",
-                table: "Properties",
-                column: "ConstructionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Properties_TypeOfTransactionId",
-                table: "Properties",
-                column: "TypeOfTransactionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -383,15 +303,6 @@ namespace BuyHouse.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Constructions");
-
-            migrationBuilder.DropTable(
-                name: "TypeOfTransactions");
-
-            migrationBuilder.DropTable(
-                name: "Cities");
         }
     }
 }

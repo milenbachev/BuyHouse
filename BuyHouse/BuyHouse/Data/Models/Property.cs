@@ -8,6 +8,10 @@
     {
         public int Id { get; set; }
 
+        [Required]
+        [MaxLength(TitleMaxLength)]
+        public string Title { get; set; }
+
         public int Area { get; set; }
 
         public int? Floor { get; set; }
@@ -20,6 +24,8 @@
 
         public int Price { get; set; }
 
+        public int Year { get; set; }
+
         [Required]
         public string ImageUrl { get; set; }
 
@@ -31,20 +37,21 @@
 
         public Category Category { get; set; }
 
-        public int CityId { get; set; }
+        [Required]
+        [MaxLength(CityNameMaxLength)]
+        public string City { get; set; }
 
-        public City City { get; set; }
-
-        public int ConstructionId { get; set; }
-
-        public Construction Construction { get; set; }
+        [Required]
+        [MaxLength(ConstructionMaxLength)]
+        public string Construction { get; set; }
 
         public int? AgentId { get; set; }
 
         public Agent Agent { get; set; }
 
-        public int TypeOfTransactionId { get; set; }
+        [Required]
+        [MaxLength(TypeOfTransactionMaxLength)]
+        public string TypeOfTransaction { get; set; }
 
-        public TypeOfTransaction TypeOfTransaction { get; set; }
     }
 }

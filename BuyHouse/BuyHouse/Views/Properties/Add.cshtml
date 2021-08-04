@@ -1,7 +1,7 @@
 ﻿@model PropertyFormModel
 
 @{ 
-    ViewBag.Name = "Add Property";
+    ViewData["Title"] = "Add Property";
 }
 
 <div class="container">
@@ -12,6 +12,16 @@
                     <label asp-for="Area"></label>
                     <input asp-for="Area" class="form-control" placeholder="enter area size">
                     <span asp-validation-for="Area" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" placeholder="enter title">
+                    <span asp-validation-for="Title" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Year"></label>
+                    <input asp-for="Year" class="form-control" placeholder="enter year">
+                    <span asp-validation-for="Year" class="small text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Floor"></label>
@@ -45,6 +55,21 @@
                     <span asp-validation-for="Description" class="small text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="Construction"></label>
+                    <input asp-for="Construction" class="form-control" placeholder="enter type of material">
+                    <span asp-validation-for="Construction" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="City"></label>
+                    <input asp-for="City" class="form-control" placeholder="enter City name">
+                    <span asp-validation-for="City" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TypeOfTransaction"></label>
+                    <input asp-for="TypeOfTransaction" class="form-control" placeholder="enter type of transaction">
+                    <span asp-validation-for="TypeOfTransaction" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="CategotyId"></label>
                     <select asp-for="CategotyId" class="form-control">
                         @foreach (var category in Model.Categories)
@@ -53,36 +78,6 @@
                         }
                     </select>
                     <span asp-validation-for="CategotyId" class="small text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CityId"></label>
-                    <select asp-for="CityId" class="form-control">
-                        @foreach (var city in Model.Cities)
-                        {
-                            <option value="@city.Id">@city.Name</option>
-                        }
-                    </select>
-                    <span asp-validation-for="CityId" class="small text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ConstructionId"></label>
-                    <select asp-for="ConstructionId" class="form-control">
-                        @foreach (var construction in Model.Constructions)
-                        {
-                            <option value="@construction.Id">@construction.Name</option>
-                        }
-                    </select>
-                    <span asp-validation-for="ConstructionId" class="small text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="TypeOfTransactionId"></label>
-                    <select asp-for="TypeOfTransactionId" class="form-control">
-                        @foreach (var transaction in Model.Transactions)
-                        {
-                            <option value="@transaction.Id">@transaction.Name</option>
-                        }
-                    </select>
-                    <span asp-validation-for="TypeOfTransactionId" class="small text-danger"></span>
                 </div>
                 <input class="btn btn-primary" type="submit" value="Save" />
             </form>

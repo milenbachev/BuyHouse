@@ -7,7 +7,7 @@
             string phoneNumber,
             string description,
             string imageUrl,
-            int cityId,
+            string city,
             string UserId);
 
         public bool IsAgent(string userId);
