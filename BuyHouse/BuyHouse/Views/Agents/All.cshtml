@@ -1,0 +1,57 @@
+﻿@model AllAgentModel
+
+@{
+    ViewData["Title"] = "All Agents , Page";
+}
+
+@if (!Model.Agents.Any())
+{
+    <h2 class="text-center">No agents found</h2>
+}
+
+<div class="row">
+    @foreach (var agent in Model.Agents)
+    {
+        <div class="card mb-3 mr-5" style="width: 18rem;">
+            <img class="card-img-top" src="@agent.ImageUrl" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@agent.Name</h5>
+                <p class="card-text">@agent.City</p>
+                <a asp-controller="Agents" asp-action="Details" asp-route-id="@agent.Id" class="btn btn-primary">Details</a>
+            </div>
+        </div>
+    }
+</div>
+
+<hr />
+
+@{
+    var previousPage = Model.CurentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = (int)Math.Ceiling((double)Model.TotalAgents / AllPropertyModel.PropertyPerPage);
+
+}
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="btn btn-info @(Model.CurentPage == 1 ? "disabled" : string.Empty)"
+               asp-controller="Properties"
+               asp-action="All"
+               asp-route-curentPage="@previousPage">Previous</a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link">@Model.CurentPage<span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="page-item">
+            <a class="btn btn-info @(Model.CurentPage == maxPage ? "disabled" : string.Empty)"
+               asp-controller="Properties"
+               asp-action="All"
+               asp-route-curentPage="@(Model.CurentPage + 1)">Next</a>
+        </li>
+    </ul>
+</nav>

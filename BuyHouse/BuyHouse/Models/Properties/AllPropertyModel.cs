@@ -4,12 +4,8 @@
     using System.Collections.Generic;
 
 
-    public class AllPropertyModel 
+    public class AllPropertyModel : PageViewModel
     {
-        public const int PropertyPerPage = 3;
-
-        public int CurentPage { get; set; } = 1;
-
         public int TotalProperties { get; set; }
 
         public string Transaction { get; set; }

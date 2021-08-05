@@ -1,6 +1,6 @@
 ﻿namespace BuyHouse.Services.Properties
 {
-    public class PropertyServiceListModel
+    public class PropertyServiceListModel 
     {
         public int Id { get; set; }
 

@@ -2,12 +2,9 @@
 {
     using BuyHouse.Data;
     using BuyHouse.Data.Models;
-    using BuyHouse.Services.Properties;
     using BuyHouse.Services.Properties.Models;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     public class PropertyService : IPropertyService
     {

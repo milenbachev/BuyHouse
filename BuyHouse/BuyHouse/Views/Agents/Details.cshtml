@@ -1,0 +1,22 @@
+﻿@model AgentsServiceListModel
+
+@{
+    ViewData["Title"] = "Agent Detail";
+}
+
+<div class="col-md-4">
+    <div class="card mb-3 " style="width: 18rem">
+        <h2 class="heading-margin text-center">Property Details</h2>
+        <img class="card-img-top" src="@Model.ImageUrl" alt="@Model.Name  - @Model.PhoneNumber (@Model.City)">
+        <div class="card-body">
+            <h5 class="card-title text-center">Name - @Model.Name </h5>
+            <p class="card-title text-left">Phonenumber : @Model.PhoneNumber</p>
+            <p class="card-title text-left">City - @Model.City</p>
+            <hr />
+            <p class="card-title text-left">Description - @Model.Description</p>
+            <a asp-controller="Agents" asp-action="All" class="btn btn-primary">Back</a>
+            <a asp-controller="Agents" asp-action="AgentProperties" class="btn btn-primary">Agent Propeties</a>
+        </div>
+    </div>
+</div>
+

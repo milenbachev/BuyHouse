@@ -1,5 +1,7 @@
 ﻿namespace BuyHouse.Services.Agents
 {
+    using BuyHouse.Models.Agents;
+
     public interface IAgentService
     {
         int Create(
@@ -9,6 +11,10 @@
             string imageUrl,
             string city,
             string UserId);
+
+        AgentsServiceQueryModel All(int curentPage, int agentPerPage);
+
+        AgentsServiceListModel Details(int id);
 
         public bool IsAgent(string userId);
 

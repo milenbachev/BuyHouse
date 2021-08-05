@@ -49,5 +49,27 @@
 
             return this.RedirectToAction("All", "Properties"); 
         }
+
+        [Authorize]
+        public IActionResult All([FromQuery]AllAgentModel agent) 
+        {
+            var agentQuery = this.agentService.All(
+                agent.CurentPage,
+                AllAgentModel.PropertyPerPage);
+
+            agent.TotalAgents = agentQuery.TotalAgents;
+            agent.Agents = agentQuery.Agents;
+
+            return this.View(agent);
+        }
+
+        [Authorize]
+        public IActionResult Details(int id) 
+        {
+            var agent = this.agentService
+                .Details(id);
+
+            return this.View(agent);
+        }
     }
 }
