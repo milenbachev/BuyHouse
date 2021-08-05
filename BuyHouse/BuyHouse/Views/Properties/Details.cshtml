@@ -1,0 +1,34 @@
+﻿@model PropertyDetailsServiceModel
+
+@{
+    ViewData["Title"] = "Detail property";
+}
+
+<div class="col-md-4">
+    <div class="card mb-3 " style="width: 18rem">
+        <h2 class="heading-margin text-center">Property Details</h2>
+        <img class="card-img-top" src="@Model.ImageUrl" alt="@Model.Title  - @Model.Year (@Model.City)">
+        <div class="card-body">
+            <h5 class="card-title text-center">@Model.Transaction - @Model.Title</h5>
+            <h4 class="card-title text-left">Price : @Model.Price EUR</h4>
+            <p class="card-title text-left">City - @Model.City ; Year - @Model.Year</p>
+            <p class="card-title text-left">Area - @Model.Area sq m</p>
+            @if (Model.Floor.HasValue)
+            {
+                <p class="card-title text-left">Floor  @Model.Floor from @Model.Floors </p>
+            }
+            @if (Model.BedRoom.HasValue)
+            {
+                <p class="card-title text-left">BedRoom - @Model.BedRoom</p>
+            }
+            @if (Model.Bath.HasValue)
+            {
+                <p class="card-title text-left">Bath - @Model.Bath</p>
+            }
+            <p class="card-title text-left">Construction - @Model.Construction</p>
+            <hr />
+            <p class="card-title text-left">Description - @Model.Description</p>
+            <a asp-controller="Properties" asp-action="All" class="btn btn-primary">Back</a>
+        </div>
+    </div>
+</div>

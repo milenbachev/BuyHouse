@@ -1,11 +1,10 @@
 ﻿namespace BuyHouse.Models.Properties
 {
-    using BuyHouse.Data.Models;
     using BuyHouse.Services.Properties;
     using System.Collections.Generic;
 
 
-    public class AllPropertyModel
+    public class AllPropertyModel 
     {
         public const int PropertyPerPage = 3;
 

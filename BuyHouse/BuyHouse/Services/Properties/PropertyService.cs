@@ -3,6 +3,7 @@
     using BuyHouse.Data;
     using BuyHouse.Data.Models;
     using BuyHouse.Services.Properties;
+    using BuyHouse.Services.Properties.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -101,6 +102,104 @@
             };
         }
 
+        public PropertyDetailsServiceModel Details(int id)
+        {
+            return this.data
+                .Properties
+                .Where(x => x.Id == id)
+                .Select(x => new PropertyDetailsServiceModel
+                {
+                    Id = x.Id,
+                    Area = x.Area,
+                    Title = x.Title,
+                    Floor = x.Floor,
+                    Floors = x.Floors,
+                    BedRoom = x.BedRoom,
+                    Bath = x.Bath,
+                    Price = x.Price,
+                    ImageUrl = x.ImageUrl,
+                    Description = x.Description,
+                    City = x.City,
+                    Construction = x.Construction,
+                    Transaction = x.TypeOfTransaction,
+                    CategoryId = x.CategotyId,
+                    CategoryName = x.Category.Name,
+                    Year = x.Year,
+                    AgentId = (int)x.AgentId,
+                    UserId = x.Agent.UserId,
+                    AgentName = x.Agent.Name
+                })
+                .FirstOrDefault();
+        }
+        public bool Edit(
+            int id,
+            int area, 
+            string title,
+            int year, 
+            int? floor, 
+            int? floors, 
+            int? bedRoom, 
+            int? bath, 
+            int price, 
+            string imageUrl, 
+            string description, 
+            int categoryId, 
+            string typeOfTransaction,
+            string city, 
+            string construction)
+        {
+            var property = this.data.Properties.Find(id);
+
+            if (property == null) 
+            {
+                return false;
+            }
+
+            property.Area = area;
+            property.Title = title;
+            property.Year = year;
+            property.Floor = floor;
+            property.Floors = floors;
+            property.BedRoom = bedRoom;
+            property.Bath = bath;
+            property.Price = price;
+            property.ImageUrl = imageUrl;
+            property.Description = description;
+            property.CategotyId = categoryId;
+            property.TypeOfTransaction = typeOfTransaction;
+            property.City = city;
+            property.Construction = construction;
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
+        public bool Delete(int id)
+        {
+            var property = this.data
+                .Properties
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            if (property == null) 
+            {
+                return false;
+            }
+
+            this.data.Properties.Remove(property);
+            this.data.SaveChanges();
+
+            return true;
+        }
+
+        public IEnumerable<PropertyServiceListModel> AgentProperties(string userId)
+        {
+            return this.GetProperties(this.data
+                .Properties
+                .Where(x => x.Agent.UserId == userId));
+        }
+
         public IEnumerable<PropertyCategoryServiceModel> AllCategory()
         {
             return this.data
@@ -172,6 +271,13 @@
                 .ToList();
 
             return transacions;
+        }
+
+        public bool AgentIsCreate(int propertyId, int agentId)
+        {
+            return this.data
+                .Properties
+                .Any(x => x.Id == propertyId && x.AgentId == agentId);
         }
     }
 }

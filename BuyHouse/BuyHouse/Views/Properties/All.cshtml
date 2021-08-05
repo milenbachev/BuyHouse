@@ -1,8 +1,13 @@
 ﻿@model AllPropertyModel
 
 @{
-    ViewData["Title"] = "All Properties, Page";
+    ViewData["Title"] = $"All Properties, Page {Model.CurentPage} ";
 
+}
+
+@if (!Model.Properties.Any())
+{
+    <h2 class="text-center">No property found</h2>
 }
 
 <form method="get">
@@ -45,30 +50,18 @@
         </div>
     </div>
 </form>
-<div class="row">
-    @foreach (var property in Model.Properties)
-    {
-        <div class="media col-md-4">
-            <img width="200" class="img-responsiv" src="@property.ImageUrl">
-            <div class="media-body">
-                <h5 class="mt-0">@property.Title</h5>
-                <h6 class="mt-0">@property.Price EUR</h6>
-                <h6 class="mt-0">@property.Area sq m</h6>
-                <h6 class="mt-0">@property.City</h6>
-            </div>
-        </div>
-    }
-</div>
-<hr/>
 
-@{ 
+<partial name="_PropertyPartial" model="@Model.Properties" />
+<hr />
+
+@{
     var previousPage = Model.CurentPage - 1;
     if (previousPage < 1)
     {
         previousPage = 1;
     }
 
-    var maxPage =(int)Math.Ceiling((double)Model.TotalProperties / AllPropertyModel.PropertyPerPage);
+    var maxPage = (int)Math.Ceiling((double)Model.TotalProperties / AllPropertyModel.PropertyPerPage);
 
 }
 <nav aria-label="...">
@@ -85,7 +78,7 @@
         <li class="page-item active">
             <a class="page-link">@Model.CurentPage<span class="sr-only">(current)</span></a>
         </li>
-    
+
         <li class="page-item">
             <a class="btn btn-info @(Model.CurentPage == maxPage ? "disabled" : string.Empty)"
                asp-controller="Properties"
@@ -97,4 +90,3 @@
         </li>
     </ul>
 </nav>
-
