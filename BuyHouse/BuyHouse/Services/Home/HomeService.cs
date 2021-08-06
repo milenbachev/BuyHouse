@@ -2,6 +2,7 @@
 {
     using BuyHouse.Data;
     using BuyHouse.Models.Home;
+    using System.Collections.Generic;
     using System.Linq;
 
     public class HomeService : IHomeService
@@ -23,6 +24,24 @@
                 TotalAgents = totalAgent,
                 TotalProperties = totalProperties
             });
+        }
+
+        public List<PropertyViewModel> GetRandom()
+        {
+            return this.data
+                .Properties
+                .OrderByDescending(x => x.Id)
+                .Take(3)
+                .Select(x => new PropertyViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    ImageUrl = x.ImageUrl,
+                    City = x.City,
+                })
+                .ToList();
+                
+
         }
     }
 }

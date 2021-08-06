@@ -1,17 +1,11 @@
-﻿using BuyHouse.Data;
-using BuyHouse.Models;
-using BuyHouse.Models.Home;
-using BuyHouse.Services.Home;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BuyHouse.Controllers
+﻿namespace BuyHouse.Controllers
 {
+    using BuyHouse.Models;
+    using BuyHouse.Models.Home;
+    using BuyHouse.Services.Home;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
+
     public class HomeController : Controller
     {
         private readonly IHomeService homeService;
@@ -23,14 +17,20 @@ namespace BuyHouse.Controllers
 
         public IActionResult Index()
         {
+            var property = this.homeService
+                .GetRandom();
+
             var total = this.homeService.GetCounts();
 
-            return this.View(total);
-        }
+            var totalProprties = total.TotalProperties;
+            var totalAgent = total.TotalAgents;
 
-        public IActionResult Privacy()
-        {
-            return View();
+            return this.View(new IndexViewModel 
+            {
+                Properties = property,
+                TotalAgents = totalAgent,
+                TotalProperties = totalProprties
+            });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
