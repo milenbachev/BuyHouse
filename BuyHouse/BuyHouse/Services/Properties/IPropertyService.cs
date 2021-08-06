@@ -2,7 +2,6 @@
 {
     using BuyHouse.Services.Properties.Models;
     using System.Collections.Generic;
-
     public interface IPropertyService
     {
         int Create(
@@ -63,6 +62,5 @@
         IEnumerable<string> AllTransaction();
 
         bool AgentIsCreate(int propertyId, int agentId);
-
     }
 }

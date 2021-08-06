@@ -3,7 +3,6 @@
     using BuyHouse.Data;
     using BuyHouse.Data.Models;
     using BuyHouse.Models.Agents;
-    using BuyHouse.Services.Properties;
     using System.Collections.Generic;
     using System.Linq;
     public class AgentService : IAgentService
@@ -93,6 +92,7 @@
                 .Agents
                 .Any(x => x.UserId == userId);
         }
+
         private IEnumerable<AgentsServiceListModel> GetAgents(IQueryable<Agent> agents)
         {
             return agents
@@ -104,7 +104,7 @@
                     Description = x.Description,
                     City = x.City,
                     ImageUrl = x.ImageUrl,
-                    UserId = x.UserId
+                    UserId = x.UserId,
                 })
                 .ToList();
         }

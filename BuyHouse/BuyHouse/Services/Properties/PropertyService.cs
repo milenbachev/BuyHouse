@@ -5,7 +5,6 @@
     using BuyHouse.Services.Properties.Models;
     using System.Collections.Generic;
     using System.Linq;
-
     public class PropertyService : IPropertyService
     {
         private readonly BuyHouseDbContext data;
@@ -208,7 +207,6 @@
                 })
                 .ToList();
         }
-
 
         public bool CategoryExist(int categoryId)
         {

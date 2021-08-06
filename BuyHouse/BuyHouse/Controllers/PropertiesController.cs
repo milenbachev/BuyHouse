@@ -3,7 +3,6 @@
     using BuyHouse.Infrastructure;
     using BuyHouse.Models.Properties;
     using BuyHouse.Services.Agents;
-
     using BuyHouse.Services.Properties;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -12,7 +11,6 @@
     {
         private readonly IPropertyService propertyService;
         private readonly IAgentService agentService;
-
 
         public PropertiesController(IPropertyService propertyService, IAgentService agentService) 
         {

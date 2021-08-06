@@ -25,7 +25,6 @@
         [Authorize]
         public IActionResult Create(AgentFormModel agent) 
         {
-
             var userId = this.User.GetId();
             var userIsAgent = agentService.IsAgent(userId);
 
@@ -70,6 +69,12 @@
                 .Details(id);
 
             return this.View(agent);
+        }
+
+        [Authorize]
+        public IActionResult CurentAgentProperties() 
+        {
+            return this.View();
         }
     }
 }
