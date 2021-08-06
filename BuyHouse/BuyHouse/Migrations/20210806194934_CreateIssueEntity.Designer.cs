@@ -4,14 +4,16 @@ using BuyHouse.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BuyHouse.Migrations
 {
     [DbContext(typeof(BuyHouseDbContext))]
-    partial class BuyHouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210806194934_CreateIssueEntity")]
+    partial class CreateIssueEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,9 +84,6 @@ namespace BuyHouse.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreateOn")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("DescriptionIssue")
                         .IsRequired()

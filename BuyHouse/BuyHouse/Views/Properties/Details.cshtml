@@ -29,6 +29,10 @@
             <hr />
             <p class="card-title text-left">Description - @Model.Description</p>
             <a asp-controller="Properties" asp-action="All" class="btn btn-primary">Back</a>
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                  <a class="btn btn-success" asp-area="" asp-controller="Issues" asp-action="Create">Create Issue</a>
+            }
         </div>
     </div>
 </div>

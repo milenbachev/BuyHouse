@@ -1,11 +1,17 @@
 ﻿namespace BuyHouse.Data.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using static DataConstant.Property;
 
     public class Property
     {
+        public Property() 
+        {
+            this.Issues = new HashSet<Issue>();
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -52,6 +58,8 @@
         [Required]
         [MaxLength(TypeOfTransactionMaxLength)]
         public string TypeOfTransaction { get; set; }
+
+        public IEnumerable<Issue> Issues { get; set; }
 
     }
 }

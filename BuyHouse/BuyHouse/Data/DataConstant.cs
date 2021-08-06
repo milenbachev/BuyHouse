@@ -14,6 +14,12 @@
             public const int CityNameMaxLength = 30;
         }
 
+        public class Issue
+        {
+            public const int DescriptionMinLength = 5;
+            public const int DesccriptionMaxLength = 200;
+        }
+
         public class Category 
         {
             public const int NameMinLength = 2;

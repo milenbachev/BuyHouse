@@ -4,14 +4,16 @@ using BuyHouse.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BuyHouse.Migrations
 {
     [DbContext(typeof(BuyHouseDbContext))]
-    partial class BuyHouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210806201148_AddCreateOnInIssue")]
+    partial class AddCreateOnInIssue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

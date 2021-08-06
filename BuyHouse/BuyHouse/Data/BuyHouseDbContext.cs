@@ -17,6 +17,8 @@
 
         public DbSet<Property> Properties { get; set; }
 
+        public DbSet<Issue> Issues { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
@@ -30,6 +32,12 @@
                 .HasOne(x => x.Agent)
                 .WithMany(x => x.Properties)
                 .HasForeignKey(x => x.AgentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Issue>()
+                .HasOne(x => x.Property)
+                .WithMany(x => x.Issues)
+                .HasForeignKey(x => x.PropertyId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
