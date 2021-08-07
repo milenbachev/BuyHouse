@@ -7,6 +7,6 @@
     {
         IndexViewModel GetCounts();
 
-        List<PropertyViewModel> GetRandom();
+        List<PropertyViewModel> GetLast();
     }
 }

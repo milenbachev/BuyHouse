@@ -15,7 +15,7 @@
             <hr />
             <p class="card-title text-left">Description - @Model.Description</p>
             <a asp-controller="Agents" asp-action="All" class="btn btn-primary">Back</a>
-            <a asp-controller="Agents" asp-action="CurentAgentProperties" asp-route-id="@Model.UserId" class="btn btn-primary">Agent Propeties</a>
+            <a asp-controller="Properties" asp-action="CurentAgent" asp-route-id="@Model.Id" class="btn btn-primary">Agent Propeties</a>
         </div>
     </div>
 </div>

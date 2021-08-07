@@ -196,6 +196,13 @@
                 .Where(x => x.Agent.UserId == userId));
         }
 
+        public IEnumerable<PropertyServiceListModel> CurentAgentProperties(int? id)
+        {
+            return this.GetProperties(this.data
+                .Properties
+                .Where(x => x.AgentId == id));
+        }
+
         public IEnumerable<PropertyCategoryServiceModel> AllCategory()
         {
             return this.data
@@ -213,26 +220,6 @@
             return this.data
                 .Categories
                 .Any(x => x.Id == categoryId);
-        }
-        private IEnumerable<PropertyServiceListModel> GetProperties(IQueryable<Property> properties) 
-        {
-            return properties
-                .Select(x => new PropertyServiceListModel
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Year = x.Year,
-                    Price = x.Price,
-                    ImageUrl = x.ImageUrl,
-                    Area = x.Area,
-                    CategoryId = x.CategotyId,
-                    CategoryName = x.Category.Name,
-                    Construction = x.Construction,
-                    City = x.City,
-                    Transaction = x.TypeOfTransaction
-                    
-                })
-                .ToList();
         }
 
         public IEnumerable<string> AllCity()
@@ -273,6 +260,27 @@
             return this.data
                 .Properties
                 .Any(x => x.Id == propertyId && x.AgentId == agentId);
+        }
+
+        private IEnumerable<PropertyServiceListModel> GetProperties(IQueryable<Property> properties) 
+        {
+            return properties
+                .Select(x => new PropertyServiceListModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Year = x.Year,
+                    Price = x.Price,
+                    ImageUrl = x.ImageUrl,
+                    Area = x.Area,
+                    CategoryId = x.CategotyId,
+                    CategoryName = x.Category.Name,
+                    Construction = x.Construction,
+                    City = x.City,
+                    Transaction = x.TypeOfTransaction
+                    
+                })
+                .ToList();
         }
     }
 }

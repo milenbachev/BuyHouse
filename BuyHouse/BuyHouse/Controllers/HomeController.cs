@@ -18,7 +18,7 @@
         public IActionResult Index()
         {
             var property = this.homeService
-                .GetRandom();
+                .GetLast();
 
             var total = this.homeService.GetCounts();
 

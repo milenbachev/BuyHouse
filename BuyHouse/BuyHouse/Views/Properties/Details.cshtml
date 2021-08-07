@@ -1,9 +1,15 @@
 ﻿@model PropertyDetailsServiceModel
 
+@inject IAgentService Agent
+
 @{
     ViewData["Title"] = "Detail property";
 }
 
+@{
+    var userId = User.GetId();
+    var userIsAgent = Agent.IsAgent(userId);
+}
 <div class="col-md-4">
     <div class="card mb-3 " style="width: 18rem">
         <h2 class="heading-margin text-center">Property Details</h2>
@@ -29,9 +35,9 @@
             <hr />
             <p class="card-title text-left">Description - @Model.Description</p>
             <a asp-controller="Properties" asp-action="All" class="btn btn-primary">Back</a>
-            @if (this.User.Identity.IsAuthenticated)
+            @if (this.User.Identity.IsAuthenticated && !userIsAgent)
             {
-                  <a class="btn btn-success" asp-area="" asp-controller="Issues" asp-action="Create">Create Issue</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Issues" asp-action="Create" asp-route-id="@Model.Id">Create Issue</a>
             }
         </div>
     </div>

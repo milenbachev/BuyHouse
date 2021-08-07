@@ -1,0 +1,15 @@
+﻿@model IEnumerable<PropertyServiceListModel>
+
+@{
+    ViewData["Title"] = "Agent Proprties";
+    ViewBag.AllowPropertyEdit = true;
+}
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">Agent dont have property</h2>
+}
+
+<partial name="_PropertyPartial" model="@Model" />
+
+<hr />

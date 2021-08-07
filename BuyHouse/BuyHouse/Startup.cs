@@ -4,6 +4,7 @@ namespace BuyHouse
     using BuyHouse.Infrastructure;
     using BuyHouse.Services.Agents;
     using BuyHouse.Services.Home;
+    using BuyHouse.Services.Issues;
     using BuyHouse.Services.Properties;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -50,6 +51,7 @@ namespace BuyHouse
 
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IAgentService, AgentService>();
+            services.AddTransient<IIssueService, IssueService>();
             services.AddTransient<IPropertyService, PropertyService>();
         }
 

@@ -5,7 +5,7 @@
 
     using static BuyHouse.Data.DataConstant.Issue;
 
-    public class AddIssueFormModel
+    public class CreateIssueFormModel
     {
         [Required]
         [StringLength(DesccriptionMaxLength , MinimumLength = DescriptionMinLength)]

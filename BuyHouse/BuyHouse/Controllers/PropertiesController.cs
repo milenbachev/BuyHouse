@@ -205,5 +205,13 @@
 
             return this.View(properties);
         }
+
+        [Authorize]
+        public IActionResult CurentAgent(int? id) 
+        {
+            var properties = this.propertyService.CurentAgentProperties(id);
+
+            return this.View(properties);
+        }
     }
 }

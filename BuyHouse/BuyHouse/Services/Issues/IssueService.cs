@@ -12,8 +12,9 @@
             this.data = data;
         }
 
-        public int Create(int propertyId, string userId, string descriptionIssue)
+        public int Create(int propertyId,  string userId, string descriptionIssue)
         {
+
             var issue = new Issue
             {
                 PropertyId = propertyId,

@@ -26,7 +26,7 @@
             });
         }
 
-        public List<PropertyViewModel> GetRandom()
+        public List<PropertyViewModel> GetLast()
         {
             return this.data
                 .Properties

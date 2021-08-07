@@ -70,11 +70,5 @@
 
             return this.View(agent);
         }
-
-        [Authorize]
-        public IActionResult CurentAgentProperties() 
-        {
-            return this.View();
-        }
     }
 }

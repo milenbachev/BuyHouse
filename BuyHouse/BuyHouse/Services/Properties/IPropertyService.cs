@@ -51,6 +51,8 @@
 
         IEnumerable<PropertyServiceListModel> AgentProperties(string userId);
 
+        IEnumerable<PropertyServiceListModel> CurentAgentProperties(int? id);
+
         IEnumerable<PropertyCategoryServiceModel> AllCategory();
 
         bool CategoryExist(int categoryId);
