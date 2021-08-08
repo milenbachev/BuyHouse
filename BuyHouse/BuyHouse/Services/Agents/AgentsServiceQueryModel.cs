@@ -11,9 +11,6 @@
 
         public int AgentPerPage { get; set; }
 
-        //TODO
-        //public IEnumerable<Property> Properties { get; set; }
-
        public IEnumerable<AgentsServiceListModel> Agents { get; set; }
     }
 }

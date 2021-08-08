@@ -277,8 +277,7 @@
                     CategoryName = x.Category.Name,
                     Construction = x.Construction,
                     City = x.City,
-                    Transaction = x.TypeOfTransaction
-                    
+                    Transaction = x.TypeOfTransaction,
                 })
                 .ToList();
         }

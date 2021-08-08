@@ -1,0 +1,21 @@
+﻿@model List<IssuesServiceListModel>
+
+@{ 
+    ViewData["Title"] = "Issue for property";
+}
+
+@if(!Model.Any()) 
+{ 
+    <h2 class="text-center">No issue for this property</h2>
+}
+<form method="post">
+    @foreach (var issue in Model)
+    {
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Issue</label>
+        <textarea class="form-control" rows="3">@issue.DescriptionIssue  - @issue.CreateOn </textarea>
+        <a asp-controller="Issues" asp-action="Edit" asp-route-id="@issue.Id" class="btn btn-warning" >Edit</a>
+        <a asp-controller="Issues" asp-action="Delete" asp-route-id="@issue.Id" class="btn btn-danger">Delete</a>
+    </div>
+    }
+</form>

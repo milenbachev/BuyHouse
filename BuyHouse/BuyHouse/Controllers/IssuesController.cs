@@ -51,5 +51,64 @@
 
             return this.RedirectToAction("All", "Properties");
         }
+
+        [Authorize]
+        public IActionResult Edit(int id) 
+        {
+            var issue = this.issueService.Details(id);
+
+            return this.View(new CreateIssueFormModel 
+            {
+                DescriptionIssue = issue.DescriptionIssue,
+                CreateOn = issue.CreateOn
+            });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Edit(int id, CreateIssueFormModel issue)
+        {
+            var agentId = agentService.AgentsId(this.User.GetId());
+
+            if (agentId == 0)
+            {
+                return RedirectToAction(nameof(AgentsController.Create), "Agents");
+            }
+
+            if (!ModelState.IsValid) 
+            {
+                return View(issue);
+            }
+
+            this.issueService.Edit(
+                id,
+                issue.DescriptionIssue,
+                issue.CreateOn);
+
+            return this.RedirectToAction("AgentProperties", "Properties");
+        }
+
+        [Authorize]
+        public IActionResult Delete(int id) 
+        {
+            var agentId = this.agentService.AgentsId(this.User.GetId());
+
+            if (agentId == 0)
+            {
+                return RedirectToAction(nameof(AgentsController.Create), "Agents");
+            }
+
+            this.issueService.Delete(id);
+
+            return this.RedirectToAction("AgentProperties", "Properties");
+        }
+
+        [Authorize]
+        public IActionResult IssueInfo(int id) 
+        {
+            var issues = this.issueService.AllIssue(id);
+
+            return this.View(issues);
+        }
     }
 }
