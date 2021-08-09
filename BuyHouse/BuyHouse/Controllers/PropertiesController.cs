@@ -111,12 +111,17 @@
         {
             var userId = this.User.GetId();
 
-            if (!this.agentService.IsAgent(userId)) 
+            if (!this.agentService.IsAgent(userId) && !User.IsAdmin()) 
             {
                 return RedirectToAction(nameof(AgentsController.Create), "Agents");
             }
 
             var property = this.propertyService.Details(id);
+
+            if (property.UserId != userId && !User.IsAdmin())
+            {
+                return Unauthorized();
+            }
 
             return this.View(new PropertyFormModel
             {
@@ -144,7 +149,7 @@
         {
             var agentId = agentService.AgentsId(this.User.GetId());
 
-            if (agentId == 0) 
+            if (agentId == 0 && !User.IsAdmin()) 
             {
                 return RedirectToAction(nameof(AgentsController.Create), "Agents");
             }
@@ -158,7 +163,7 @@
 
                 return this.View(property);
             }
-            if (!this.propertyService.AgentIsCreate(id, (int)agentId)) 
+            if (!this.propertyService.AgentIsCreate(id, (int)agentId) && !User.IsAdmin()) 
             {
                 return BadRequest();
             }

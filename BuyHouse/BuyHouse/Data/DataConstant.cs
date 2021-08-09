@@ -2,6 +2,13 @@
 {
     public class DataConstant
     {
+        public class User 
+        {
+            public const int FullNameMinLength = 5;
+            public const int FullNameMaxLength = 40;
+            public const int PasswordMinLength = 5;
+            public const int PasswordMaxLength = 40;
+        }
         public class Agent 
         {
             public const int NameMinLength = 3;

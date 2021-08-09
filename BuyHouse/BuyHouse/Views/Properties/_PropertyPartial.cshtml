@@ -14,6 +14,12 @@
                     <a asp-controller="Properties" asp-action="Edit" asp-route-id="@property.Id" class="btn btn-warning">Edit</a>
                     <a asp-controller="Properties" asp-action="Delete" asp-route-id="@property.Id" class="btn btn-danger">Delete</a>
                 }
+                else if (User.IsAdmin())
+                {
+                    <a asp-controller="Properties" asp-action="Details" asp-route-id="@property.Id" class="btn btn-primary">Details</a>
+                    <a asp-controller="Properties" asp-action="Edit" asp-route-id="@property.Id" class="btn btn-warning">Edit</a>
+                    <a asp-controller="Properties" asp-action="Delete" asp-route-id="@property.Id" class="btn btn-danger">Delete</a>
+                }
                 else
                 {
                     <a asp-controller="Properties" asp-action="Details" asp-route-id="@property.Id" class="btn btn-primary">Details</a>

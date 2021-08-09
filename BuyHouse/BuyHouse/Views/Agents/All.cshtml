@@ -1,7 +1,7 @@
 ﻿@model AllAgentModel
 
 @{
-    ViewData["Title"] = "All Agents , Page";
+    ViewData["Title"] = $"All Agents , Page - {Model.CurentPage}";
 }
 
 @if (!Model.Agents.Any())

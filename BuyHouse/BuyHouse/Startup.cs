@@ -1,6 +1,7 @@
 namespace BuyHouse
 {
     using BuyHouse.Data;
+    using BuyHouse.Data.Models;
     using BuyHouse.Infrastructure;
     using BuyHouse.Services.Agents;
     using BuyHouse.Services.Home;
@@ -34,13 +35,14 @@ namespace BuyHouse
                 .AddDatabaseDeveloperPageExceptionFilter();
 
             services
-                .AddDefaultIdentity<IdentityUser>(options => 
+                .AddDefaultIdentity<User>(options =>
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<BuyHouseDbContext>();
 
             services

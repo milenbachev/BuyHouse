@@ -2,6 +2,10 @@
 
 @{
     ViewData["Title"] = "Edir Issue";
- }
+}
 
 <partial name="_IssueFormPartial" model="@Model" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
