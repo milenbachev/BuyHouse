@@ -18,11 +18,15 @@
         {
             var totalProperties = this.data.Properties.Count();
             var totalAgent = this.data.Agents.Count();
+            var totalCategory = this.data.Categories.Count();
+            var totalUsers = this.data.Users.Count();
 
             return (new IndexViewModel
             {
                 TotalAgents = totalAgent,
-                TotalProperties = totalProperties
+                TotalProperties = totalProperties,
+                TotalCategory = totalCategory,
+                TotalUsers = totalUsers
             });
         }
 

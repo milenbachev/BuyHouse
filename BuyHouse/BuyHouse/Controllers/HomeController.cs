@@ -22,14 +22,13 @@
 
             var total = this.homeService.GetCounts();
 
-            var totalProprties = total.TotalProperties;
-            var totalAgent = total.TotalAgents;
-
             return this.View(new IndexViewModel 
             {
                 Properties = property,
-                TotalAgents = totalAgent,
-                TotalProperties = totalProprties
+                TotalAgents = total.TotalAgents,
+                TotalProperties = total.TotalProperties,
+                TotalCategory = total.TotalCategory,
+                TotalUsers = total.TotalUsers
             });
         }
 

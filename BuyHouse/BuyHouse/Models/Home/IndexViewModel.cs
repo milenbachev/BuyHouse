@@ -8,6 +8,10 @@
 
         public int TotalAgents { get; set; }
 
+        public int TotalCategory { get; set; }
+
+        public int TotalUsers { get; set; }
+
         public List<PropertyViewModel> Properties { get; set; }
     }
 }

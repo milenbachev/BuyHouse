@@ -10,7 +10,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
 
-    using static WebConstants;
+    using static Areas.Admin.AdminConstants;
     public static class ApplicationBuilderExtension
     {
         public static IApplicationBuilder PrepareDatabase(this IApplicationBuilder app) 

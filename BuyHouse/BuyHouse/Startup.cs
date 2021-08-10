@@ -1,5 +1,6 @@
 namespace BuyHouse
 {
+    using BuyHouse.Areas.Admin.Services;
     using BuyHouse.Data;
     using BuyHouse.Data.Models;
     using BuyHouse.Infrastructure;
@@ -51,6 +52,7 @@ namespace BuyHouse
                     option.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
                 });
 
+            services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IAgentService, AgentService>();
             services.AddTransient<IIssueService, IssueService>();
@@ -83,6 +85,7 @@ namespace BuyHouse
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapDefaultAreaRoute();
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });

@@ -17,10 +17,16 @@
                 <a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="AgentProperties">My Properties</a>
             </li>
         }
-        else if(!userIsAdmin)
+        else if (!userIsAdmin)
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Agents" asp-action="Create">Become Agent</a>
+            </li>
+        }
+        else if (userIsAdmin) 
+        {
+            <li>
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Categories" asp-action="Create">Create Category</a>
             </li>
         }
         <li class="nav-item">

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@{ 
+@{
     var propreties = Model.Properties;
     var first = propreties.Any() ? propreties[0] : null;
     var second = propreties.Count > 1 ? propreties[1] : null;
@@ -17,7 +17,9 @@
         <p>We have:</p>
         <ul class="list-group">
             <li class="list-group-item bg-info">Properties: @Model.TotalProperties</li>
-            <li class="list-group-item bg-light">Agents: @Model.TotalAgents</li>
+            <li class="list-group-item bg-light">Categories: @Model.TotalCategory</li>
+            <li class="list-group-item bg-info">Agents: @Model.TotalAgents</li>
+            <li class="list-group-item bg-light">Users: @Model.TotalUsers</li>
         </ul>
     </div>
 </div>
