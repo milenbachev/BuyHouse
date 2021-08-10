@@ -193,7 +193,7 @@
         {
             var agentId = this.agentService.AgentsId(this.User.GetId());
 
-            if (agentId == 0) 
+            if (agentId == 0 && !User.IsAdmin()) 
             {
                 return RedirectToAction(nameof(AgentsController.Create), "Agents");
             }

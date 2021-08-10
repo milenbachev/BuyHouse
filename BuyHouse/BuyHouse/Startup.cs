@@ -1,6 +1,6 @@
 namespace BuyHouse
 {
-    using BuyHouse.Areas.Admin.Services;
+    using BuyHouse.Areas.Admin.Services.Categories;
     using BuyHouse.Data;
     using BuyHouse.Data.Models;
     using BuyHouse.Infrastructure;

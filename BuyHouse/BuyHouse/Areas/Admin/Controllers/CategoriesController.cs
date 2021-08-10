@@ -1,7 +1,7 @@
 ﻿namespace BuyHouse.Areas.Admin.Controllers
 {
     using BuyHouse.Areas.Admin.Models;
-    using BuyHouse.Areas.Admin.Services;
+    using BuyHouse.Areas.Admin.Services.Categories;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -38,6 +38,51 @@
                 category.Name);
 
             return RedirectToAction("Index", "Home");
+        }
+
+
+        public IActionResult All([FromQuery]AllCategoryModel category) 
+        {
+            var queryCategory = this.categoryService.All(
+                category.CategoryPerPage,
+                category.CurentPage);
+
+            category.TotalCategories = queryCategory.TotalCategories;
+            category.Categories = queryCategory.Categories;
+
+            return this.View(category);
+        }
+
+        public IActionResult Edit(int id) 
+        {
+            var category = this.categoryService.Details(id);
+
+            return this.View(new CategoryFormModel 
+            {
+                Name = category.Name
+            });
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, CategoryFormModel category) 
+        {
+            if (!ModelState.IsValid) 
+            {
+                return View(category);
+            }
+
+            this.categoryService.Edit(
+                id,
+                category.Name);
+
+            return this.RedirectToAction("All", "Categories");
+        }
+
+        public IActionResult Delete(int id) 
+        {
+            this.categoryService.Delete(id);
+
+            return this.RedirectToAction("All", "Categories");
         }
     }
 }

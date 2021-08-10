@@ -1,0 +1,14 @@
+﻿@model IndexViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <div class="col-md-4 offset-4">
+        <p>We have:</p>
+        <ul class="list-group">
+            <li class="list-group-item bg-info">Properties: @Model.TotalProperties</li>
+            <li class="list-group-item bg-light">Categories: @Model.TotalCategory</li>
+            <li class="list-group-item bg-info">Agents: @Model.TotalAgents</li>
+            <li class="list-group-item bg-light">Users: @Model.TotalUsers</li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@model AllCategoryModel
+
+@{
+    ViewData["Title"] = "All Categories";
+}
+
+<h2 class="text-center">All Categories</h2>
+
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Category Name</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    @foreach (var category in Model.Categories)
+    {
+        <tbody>
+            <tr>
+                <th scope="row">@category.Id</th>
+                <td >@category.Name</td>
+                <td>
+                    <a asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-warning float-right ml-3">Edit</a>
+                    <a asp-area="Admin" asp-controller="Categories" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger float-right ml-3">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    }
+</table>
+<hr />
+
+@{
+    var previousPage = Model.CurentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = (int)Math.Ceiling((double)Model.TotalCategories / Model.CategoryPerPage);
+
+}
+
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="btn btn-info @(Model.CurentPage == 1 ? "disabled" : string.Empty)"
+               asp-controller="Categories"
+               asp-action="All"
+               asp-route-curentPage="@previousPage">Previous</a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link">@Model.CurentPage<span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="page-item">
+            <a class="btn btn-info @(Model.CurentPage == maxPage ? "disabled" : string.Empty)"
+               asp-controller="Categories"
+               asp-action="All"
+               asp-route-curentPage="@(Model.CurentPage + 1)">Next</a>
+        </li>
+    </ul>
+</nav>
+

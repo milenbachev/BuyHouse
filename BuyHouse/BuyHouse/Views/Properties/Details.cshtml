@@ -9,6 +9,7 @@
 @{
     var userId = User.GetId();
     var userIsAgent = Agent.IsAgent(userId);
+    var userIsAdmin = User.IsAdmin();
 }
 <div class="col-md-4">
     <div class="card mb-3 " style="width: 18rem">
@@ -35,7 +36,7 @@
             <hr />
             <p class="card-title text-left">Description - @Model.Description</p>
             <a asp-controller="Properties" asp-action="All" class="btn btn-primary">Back</a>
-            @if (this.User.Identity.IsAuthenticated && !userIsAgent)
+            @if (this.User.Identity.IsAuthenticated && !userIsAgent && !userIsAdmin)
             {
                 <a class="btn btn-success" asp-area="" asp-controller="Issues" asp-action="Create" asp-route-id="@Model.Id">Create Issue</a>
             }
