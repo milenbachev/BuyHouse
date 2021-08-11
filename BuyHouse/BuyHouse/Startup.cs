@@ -1,6 +1,5 @@
 namespace BuyHouse
 {
-    using BuyHouse.Areas.Admin.Services.Categories;
     using BuyHouse.Data;
     using BuyHouse.Data.Models;
     using BuyHouse.Infrastructure;
@@ -15,6 +14,8 @@ namespace BuyHouse
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using BuyHouse.Areas.Admin.Services.Agents;
+    using BuyHouse.Areas.Admin.Services.Categories;
     using Microsoft.Extensions.Hosting;
 
     public class Startup
@@ -52,6 +53,7 @@ namespace BuyHouse
                     option.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
                 });
 
+            services.AddTransient<IAgentAdminService, AgentAdminService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IAgentService, AgentService>();

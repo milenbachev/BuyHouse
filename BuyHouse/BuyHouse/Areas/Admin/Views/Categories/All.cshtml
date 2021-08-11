@@ -21,8 +21,8 @@
                 <th scope="row">@category.Id</th>
                 <td >@category.Name</td>
                 <td>
-                    <a asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-warning float-right ml-3">Edit</a>
                     <a asp-area="Admin" asp-controller="Categories" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger float-right ml-3">Delete</a>
+                    <a asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-warning float-right ml-3">Edit</a>
                 </td>
             </tr>
         </tbody>

@@ -1,6 +1,6 @@
 ﻿namespace BuyHouse.Areas.Admin.Controllers
 {
-    using BuyHouse.Areas.Admin.Models;
+    using BuyHouse.Areas.Admin.Models.Categories;
     using BuyHouse.Areas.Admin.Services.Categories;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

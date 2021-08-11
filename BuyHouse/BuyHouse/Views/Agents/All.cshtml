@@ -18,6 +18,10 @@
                 <h5 class="card-title">@agent.Name</h5>
                 <p class="card-text">@agent.City</p>
                 <a asp-controller="Agents" asp-action="Details" asp-route-id="@agent.Id" class="btn btn-primary">Details</a>
+                @if (User.IsAdmin())
+                {
+                    <a asp-area="Admin"  asp-controller="Agents" asp-action="Edit" asp-route-id="@agent.Id" class="btn btn-warning">Edit</a>
+                }
             </div>
         </div>
     }

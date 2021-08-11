@@ -1,4 +1,4 @@
-﻿namespace BuyHouse.Areas.Admin.Models
+﻿namespace BuyHouse.Areas.Admin.Models.Categories
 {
     using System.ComponentModel.DataAnnotations;
 
