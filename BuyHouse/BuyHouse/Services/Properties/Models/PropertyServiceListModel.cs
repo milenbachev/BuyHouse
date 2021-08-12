@@ -23,5 +23,7 @@
         public string Construction { get; set; }
 
         public string TypeOfTransaction { get; set; }
+
+        public bool IsPublic { get; set; }
     }
 }

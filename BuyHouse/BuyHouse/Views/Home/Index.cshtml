@@ -10,6 +10,17 @@
     var second = propreties.Count > 1 ? propreties[1] : null;
     var third = propreties.Count > 2 ? propreties[2] : null;
 }
+@if (!Model.Properties.Any())
+{
+    <div class="jumbotron">
+        <h1 class="display-4">Sorry we don't have properties at the moment!</h1>
+        <p class="lead">If you want to add new property just press add button</p>
+        <hr class="my-4">
+        <p class="lead">
+            <a asp-controller="Properties" asp-action="Add" class="btn btn-primary btn-lg" role="button">Add Property</a>
+        </p>
+    </div>
+}
 
 <partial name="_InfoPartial" model="@Model" />
 

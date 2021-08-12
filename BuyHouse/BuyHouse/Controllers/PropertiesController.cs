@@ -57,7 +57,7 @@
                 return this.View(property);
             }
 
-            this.propertyService.Create(
+            var propertyId = this.propertyService.Create(
                 property.Area,
                 property.Title,
                 property.Year,
@@ -74,7 +74,7 @@
                 property.Construction,
                 agentId);
 
-            return this.RedirectToAction("All", "Properties");
+            return this.RedirectToAction("Details", "Properties", new { id = propertyId});
         }
 
         public IActionResult All([FromQuery]AllPropertyModel property) 
@@ -172,9 +172,10 @@
                 property.CategotyId,
                 property.TypeOfTransaction,
                 property.City,
-                property.Construction);
+                property.Construction,
+                this.User.IsAdmin());
 
-            return this.RedirectToAction("All", "Properties");
+            return this.RedirectToAction("Details", "Properties", new { id = id});
         }
 
         [Authorize]

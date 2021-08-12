@@ -20,7 +20,7 @@
 
         public IndexViewModel GetCounts()
         {
-            var totalProperties = this.data.Properties.Count();
+            var totalProperties = this.data.Properties.Count(x => x.IsPublic);
             var totalAgent = this.data.Agents.Count();
             var totalCategory = this.data.Categories.Count();
             var totalUsers = this.data.Users.Count();
@@ -38,6 +38,7 @@
         {
             return this.data
                 .Properties
+                .Where(x => x.IsPublic)
                 .OrderByDescending(x => x.Id)
                 .Take(3)
                 .ProjectTo<PropertyViewModel>(this.mapper.ConfigurationProvider)

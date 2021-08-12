@@ -20,6 +20,8 @@
 
         public int Area { get; set; }
 
+        public bool IsPublic { get; set; }
+
         public int? Floor { get; set; }
         
         public int? Floors { get; set; }

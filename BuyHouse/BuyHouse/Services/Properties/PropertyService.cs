@@ -52,6 +52,7 @@
                 Construction = construction,
                 City = city,
                 CategoryId = categoryId,
+                IsPublic = false,
                 AgentId = agentId,
 
             };
@@ -63,13 +64,15 @@
         }
 
         public PropertyServiceQueryModel All(
-            string transaction,
-            string city,
-            string construction, 
-            int curentPage, 
-            int propertyPerPage)
+            string transaction = null,
+            string city = null,
+            string construction = null, 
+            int curentPage = 1, 
+            int propertyPerPage = 5,
+            bool publicOnly = true)
         {
-            var propertyQuery = this.data.Properties.AsQueryable();
+            var propertyQuery = this.data.Properties
+                .Where(x => publicOnly ? x.IsPublic : true);
 
             if (!string.IsNullOrWhiteSpace(city))
             {
@@ -125,7 +128,8 @@
             int categoryId, 
             string typeOfTransaction,
             string city, 
-            string construction)
+            string construction,
+            bool isPublic)
         {
             var property = this.data.Properties.Find(id);
 
@@ -148,6 +152,7 @@
             property.TypeOfTransaction = typeOfTransaction;
             property.City = city;
             property.Construction = construction;
+            property.IsPublic = isPublic;
 
             this.data.SaveChanges();
 
@@ -172,6 +177,15 @@
             return true;
         }
 
+        public void Approve(int id)
+        {
+            var property = this.data.Properties.Find(id);
+
+            property.IsPublic = !property.IsPublic;
+
+            this.data.SaveChanges();
+        }
+
         public IEnumerable<PropertyServiceListModel> AgentProperties(string userId)
         {
             return this.GetProperties(this.data
@@ -183,7 +197,7 @@
         {
             return this.GetProperties(this.data
                 .Properties
-                .Where(x => x.AgentId == id));
+                .Where(x => x.AgentId == id && x.IsPublic));
         }
 
         public IEnumerable<PropertyCategoryServiceModel> AllCategory()

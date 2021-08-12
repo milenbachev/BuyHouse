@@ -22,11 +22,12 @@
             int agentId);
 
         PropertyServiceQueryModel All(
-            string transaction,
-            string city,
-            string construction,
-            int curentPage, 
-            int propertyPerPage);
+            string transaction = null,
+            string city = null,
+            string construction = null,
+            int curentPage = 1,
+            int propertyPerPage = 5,
+            bool publicOnly = true);
 
         PropertyDetailsServiceModel Details(int id);
 
@@ -45,7 +46,8 @@
             int categoryId,
             string typeOfTransaction,
             string city,
-            string construction);
+            string construction,
+            bool isPublic);
 
         bool Delete(int id);
 
@@ -54,6 +56,8 @@
         IEnumerable<PropertyServiceListModel> CurentAgentProperties(int id);
 
         IEnumerable<PropertyCategoryServiceModel> AllCategory();
+
+        void Approve(int id);
 
         bool CategoryExist(int categoryId);
 
