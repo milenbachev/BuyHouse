@@ -1,6 +1,6 @@
 ﻿namespace BuyHouse.Models.Properties
 {
-    using BuyHouse.Services.Properties;
+    using BuyHouse.Services.Properties.Models;
     using System.Collections.Generic;
 
 

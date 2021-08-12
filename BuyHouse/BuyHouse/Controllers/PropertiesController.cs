@@ -1,5 +1,6 @@
 ﻿namespace BuyHouse.Controllers
 {
+    using AutoMapper;
     using BuyHouse.Infrastructure;
     using BuyHouse.Models.Properties;
     using BuyHouse.Services.Agents;
@@ -11,11 +12,13 @@
     {
         private readonly IPropertyService propertyService;
         private readonly IAgentService agentService;
+        private readonly IMapper mapper;
 
-        public PropertiesController(IPropertyService propertyService, IAgentService agentService) 
+        public PropertiesController(IPropertyService propertyService, IAgentService agentService, IMapper mapper) 
         {
             this.propertyService = propertyService;
             this.agentService = agentService;
+            this.mapper = mapper;
         }
 
         [Authorize]
@@ -69,8 +72,7 @@
                 property.TypeOfTransaction,
                 property.City,
                 property.Construction,
-                agentId
-                );
+                agentId);
 
             return this.RedirectToAction("All", "Properties");
         }
@@ -82,7 +84,7 @@
                 property.City,
                 property.Construction,
                 property.CurentPage,
-                AllPropertyModel.PropertyPerPage);
+                AllPropertyModel.ObjectPerPage);
 
             var propertiesCity = this.propertyService.AllCity();
             var propertyConstruction = this.propertyService.AllConstruction();
@@ -123,24 +125,11 @@
                 return Unauthorized();
             }
 
-            return this.View(new PropertyFormModel
-            {
-                Area = property.Area,
-                Title = property.Title,
-                Year = property.Year,
-                Floor = property.Floor,
-                Floors = property.Floors,
-                BedRoom = property.BedRoom,
-                Bath = property.Bath,
-                Price = property.Price,
-                ImageUrl = property.ImageUrl,
-                Description = property.Description,
-                City = property.City,
-                Construction = property.Construction,
-                TypeOfTransaction = property.Transaction,
-                CategotyId = property.CategoryId,
-                Categories = this.propertyService.AllCategory(),
-            });
+            var propertyForm = this.mapper.Map<PropertyFormModel>(property);
+
+            propertyForm.Categories = this.propertyService.AllCategory();
+
+            return View(propertyForm);
         }
 
         [Authorize]
@@ -212,7 +201,7 @@
         }
 
         [Authorize]
-        public IActionResult CurentAgent(int? id) 
+        public IActionResult CurentAgent(int id) 
         {
             var properties = this.propertyService.CurentAgentProperties(id);
 

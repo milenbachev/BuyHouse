@@ -1,17 +1,20 @@
 ﻿namespace BuyHouse.Services.Agents
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using BuyHouse.Data;
     using BuyHouse.Data.Models;
     using BuyHouse.Models.Agents;
-    using System.Collections.Generic;
     using System.Linq;
     public class AgentService : IAgentService
     {
         private readonly BuyHouseDbContext data;
+        private readonly IMapper mapper;
 
-        public AgentService(BuyHouseDbContext data) 
+        public AgentService(BuyHouseDbContext data, IMapper mapper) 
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public int Create(
@@ -22,7 +25,6 @@
             string city,
             string userId)
         {
-
             var agent = new Agent
             {
                 Name = name,
@@ -43,10 +45,12 @@
         {
             var agentQuery = this.data.Agents.AsQueryable();
 
-            var agents = this.GetAgents(agentQuery
+            var agents = this.data
+                .Agents
+                .ProjectTo<AgentsServiceListModel>(this.mapper.ConfigurationProvider)
                 .Skip((curentPage - 1) * agentPerPage)
-                .Take(agentPerPage));
-                
+                .Take(agentPerPage)
+                .ToList(); 
               
             var totalAgent = agentQuery.Count();
 
@@ -64,20 +68,11 @@
             return this.data
                 .Agents
                 .Where(x => x.Id == id)
-                .Select(x => new AgentsServiceListModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    PhoneNumber = x.PhoneNumber,
-                    Description = x.Description,
-                    ImageUrl = x.ImageUrl,
-                    City = x.City,
-                    UserId = x.UserId,
-                })
+                .ProjectTo<AgentsServiceListModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefault();
         }
 
-        public int? AgentsId(string userId)
+        public int AgentsId(string userId)
         {
             return this.data
                 .Agents
@@ -91,22 +86,6 @@
             return this.data
                 .Agents
                 .Any(x => x.UserId == userId);
-        }
-
-        private IEnumerable<AgentsServiceListModel> GetAgents(IQueryable<Agent> agents)
-        {
-            return agents
-                .Select(x => new AgentsServiceListModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    PhoneNumber = x.PhoneNumber,
-                    Description = x.Description,
-                    City = x.City,
-                    ImageUrl = x.ImageUrl,
-                    UserId = x.UserId,
-                })
-                .ToList();
         }
     }
 }

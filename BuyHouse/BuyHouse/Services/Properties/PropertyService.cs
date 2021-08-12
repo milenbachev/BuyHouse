@@ -1,5 +1,7 @@
 ﻿namespace BuyHouse.Services.Properties
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using BuyHouse.Data;
     using BuyHouse.Data.Models;
     using BuyHouse.Services.Properties.Models;
@@ -8,10 +10,12 @@
     public class PropertyService : IPropertyService
     {
         private readonly BuyHouseDbContext data;
+        private readonly IMapper mapper;
 
-        public PropertyService(BuyHouseDbContext data) 
+        public PropertyService(BuyHouseDbContext data, IMapper mapper) 
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public int Create(
@@ -29,7 +33,7 @@
             string typeOfTransaction, 
             string city,
             string construction,
-            int? agentId)
+            int agentId)
 
         {
             var property = new Property
@@ -47,7 +51,7 @@
                 TypeOfTransaction = typeOfTransaction,
                 Construction = construction,
                 City = city,
-                CategotyId = categoryId,
+                CategoryId = categoryId,
                 AgentId = agentId,
 
             };
@@ -103,28 +107,7 @@
             return this.data
                 .Properties
                 .Where(x => x.Id == id)
-                .Select(x => new PropertyDetailsServiceModel
-                {
-                    Id = x.Id,
-                    Area = x.Area,
-                    Title = x.Title,
-                    Floor = x.Floor,
-                    Floors = x.Floors,
-                    BedRoom = x.BedRoom,
-                    Bath = x.Bath,
-                    Price = x.Price,
-                    ImageUrl = x.ImageUrl,
-                    Description = x.Description,
-                    City = x.City,
-                    Construction = x.Construction,
-                    Transaction = x.TypeOfTransaction,
-                    CategoryId = x.CategotyId,
-                    CategoryName = x.Category.Name,
-                    Year = x.Year,
-                    AgentId = (int)x.AgentId,
-                    UserId = x.Agent.UserId,
-                    AgentName = x.Agent.Name
-                })
+                .ProjectTo<PropertyDetailsServiceModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefault();
         }
         public bool Edit(
@@ -161,7 +144,7 @@
             property.Price = price;
             property.ImageUrl = imageUrl;
             property.Description = description;
-            property.CategotyId = categoryId;
+            property.CategoryId = categoryId;
             property.TypeOfTransaction = typeOfTransaction;
             property.City = city;
             property.Construction = construction;
@@ -196,7 +179,7 @@
                 .Where(x => x.Agent.UserId == userId));
         }
 
-        public IEnumerable<PropertyServiceListModel> CurentAgentProperties(int? id)
+        public IEnumerable<PropertyServiceListModel> CurentAgentProperties(int id)
         {
             return this.GetProperties(this.data
                 .Properties
@@ -265,20 +248,7 @@
         private IEnumerable<PropertyServiceListModel> GetProperties(IQueryable<Property> properties) 
         {
             return properties
-                .Select(x => new PropertyServiceListModel
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Year = x.Year,
-                    Price = x.Price,
-                    ImageUrl = x.ImageUrl,
-                    Area = x.Area,
-                    CategoryId = x.CategotyId,
-                    CategoryName = x.Category.Name,
-                    Construction = x.Construction,
-                    City = x.City,
-                    Transaction = x.TypeOfTransaction,
-                })
+                .ProjectTo<PropertyServiceListModel>(this.mapper.ConfigurationProvider)
                 .ToList();
         }
     }

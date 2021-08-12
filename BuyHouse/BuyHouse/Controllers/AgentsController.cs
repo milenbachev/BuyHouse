@@ -54,7 +54,7 @@
         {
             var agentQuery = this.agentService.All(
                 agent.CurentPage,
-                AllAgentModel.PropertyPerPage);
+                AllAgentModel.ObjectPerPage);
 
             agent.TotalAgents = agentQuery.TotalAgents;
             agent.Agents = agentQuery.Agents;

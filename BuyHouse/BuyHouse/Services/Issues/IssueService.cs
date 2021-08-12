@@ -1,5 +1,7 @@
 ﻿namespace BuyHouse.Services.Issues
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using BuyHouse.Data;
     using BuyHouse.Data.Models;
     using System;
@@ -9,10 +11,12 @@
     public class IssueService : IIssueService
     {
         private readonly BuyHouseDbContext data;
+        private readonly IMapper mapper;
 
-        public IssueService(BuyHouseDbContext data) 
+        public IssueService(BuyHouseDbContext data, IMapper mapper) 
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public int Create(int propertyId,  string userId, string descriptionIssue)
@@ -37,13 +41,7 @@
             var issues = this.data
                 .Issues
                 .Where(x => x.PropertyId == id)
-                .Select(x => new IssuesServiceListModel
-                {
-                    Id = x.Id,
-                    UserId = x.UserId,
-                    DescriptionIssue = x.DescriptionIssue,
-                    CreateOn = x.CreateOn
-                })
+                .ProjectTo<IssuesServiceListModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
             return issues;
@@ -71,11 +69,7 @@
             var issue = this.data
                 .Issues
                 .Where(x => x.Id == id)
-                .Select(x => new IssuesServiceListModel
-                {
-                    DescriptionIssue = x.DescriptionIssue,
-                    CreateOn = System.DateTime.UtcNow
-                })
+                .ProjectTo<IssuesServiceListModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefault();
 
             return issue;

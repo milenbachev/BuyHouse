@@ -37,7 +37,7 @@
             this.categoryService.Create(
                 category.Name);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("All", "Categories");
         }
 
 

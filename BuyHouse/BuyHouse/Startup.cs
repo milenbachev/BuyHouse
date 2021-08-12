@@ -17,6 +17,7 @@ namespace BuyHouse
     using BuyHouse.Areas.Admin.Services.Agents;
     using BuyHouse.Areas.Admin.Services.Categories;
     using Microsoft.Extensions.Hosting;
+    using BuyHouse.Areas.Admin.Services.Users;
 
     public class Startup
     {
@@ -53,6 +54,9 @@ namespace BuyHouse
                     option.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
                 });
 
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAgentAdminService, AgentAdminService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IHomeService, HomeService>();

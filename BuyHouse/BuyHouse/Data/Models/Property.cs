@@ -39,7 +39,7 @@
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; }
 
-        public int CategotyId { get; set; }
+        public int CategoryId { get; set; }
 
         public Category Category { get; set; }
 
@@ -51,7 +51,7 @@
         [MaxLength(ConstructionMaxLength)]
         public string Construction { get; set; }
 
-        public int? AgentId { get; set; }
+        public int AgentId { get; set; }
 
         public Agent Agent { get; set; }
 

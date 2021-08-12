@@ -35,12 +35,18 @@
         public CategoryServiceQueryModel All(int categoryPerPage, int curentPage)
         {
             var queryCategory = this.data.Categories.AsQueryable();
-
-            var category = this.GetCategory(queryCategory
-                .Skip((curentPage - 1) * categoryPerPage)
-                .Take(categoryPerPage));
-
             var totalCategories = queryCategory.Count();
+
+            var category = this.data
+                .Categories
+                .Select(x => new CategoryServiceListModel
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                })
+                .Skip((curentPage - 1) * categoryPerPage)
+                .Take(categoryPerPage)
+                .ToList();
 
             return new CategoryServiceQueryModel
             {
@@ -97,18 +103,6 @@
             this.data.SaveChanges();
 
             return true;
-        }
-
-        private IEnumerable<CategoryServiceListModel> GetCategory(IQueryable<Category> category)
-        {
-            return category
-                .Select(x => new CategoryServiceListModel
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                    
-                })
-                .ToList();
-        }
+        } 
     }
 }

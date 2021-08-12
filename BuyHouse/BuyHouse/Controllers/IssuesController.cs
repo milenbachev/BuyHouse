@@ -1,5 +1,6 @@
 ﻿namespace BuyHouse.Controllers
 {
+    using AutoMapper;
     using BuyHouse.Infrastructure;
     using BuyHouse.Models.Issues;
     using BuyHouse.Services.Agents;
@@ -11,11 +12,13 @@
     {
         private readonly IIssueService issueService;
         private readonly IAgentService agentService;
+        private readonly IMapper mapper;
 
-        public IssuesController(IIssueService issueService, IAgentService agentService) 
+        public IssuesController(IIssueService issueService, IAgentService agentService, IMapper mapper) 
         {
             this.issueService = issueService;
             this.agentService = agentService;
+            this.mapper = mapper;
         }
 
         [Authorize]
@@ -31,10 +34,11 @@
         {
             var userId = this.User.GetId();
             var userIsAgent = agentService.IsAgent(userId);
+            var userIsAdmin = this.User.IsAdmin();
 
             var propertyId = id;
 
-            if (userIsAgent) 
+            if (userIsAgent || userIsAdmin) 
             {
                 return BadRequest();
             }
@@ -55,13 +59,19 @@
         [Authorize]
         public IActionResult Edit(int id) 
         {
+            var userId = this.User.GetId();
+            var userIsAdmin = this.User.IsAdmin();
+
             var issue = this.issueService.Details(id);
 
-            return this.View(new CreateIssueFormModel 
+            if (issue.UserId != userId && userIsAdmin)
             {
-                DescriptionIssue = issue.DescriptionIssue,
-                CreateOn = issue.CreateOn
-            });
+                return Unauthorized();
+            }
+
+            var issueForm = this.mapper.Map<CreateIssueFormModel>(issue);
+
+            return this.View(issueForm);
         }
 
         [Authorize]

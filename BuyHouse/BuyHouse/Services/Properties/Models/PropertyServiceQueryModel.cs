@@ -1,4 +1,4 @@
-﻿namespace BuyHouse.Services.Properties
+﻿namespace BuyHouse.Services.Properties.Models
 {
     using System.Collections.Generic;
     public class PropertyServiceQueryModel

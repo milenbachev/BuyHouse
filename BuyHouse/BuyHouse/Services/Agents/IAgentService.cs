@@ -18,6 +18,6 @@
 
         public bool IsAgent(string userId);
 
-        public int? AgentsId(string userId);
+        public int AgentsId(string userId);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace BuyHouse.Services.Properties
+﻿namespace BuyHouse.Services.Properties.Models
 {
     public class PropertyServiceListModel 
     {
@@ -22,6 +22,6 @@
 
         public string Construction { get; set; }
 
-        public string Transaction { get; set; }
+        public string TypeOfTransaction { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using BuyHouse.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BuyHouse.Migrations
 {
     [DbContext(typeof(BuyHouseDbContext))]
-    partial class BuyHouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210812104626_FixNameOfCategoryId")]
+    partial class FixNameOfCategoryId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,7 +116,7 @@ namespace BuyHouse.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AgentId")
+                    b.Property<int?>("AgentId")
                         .HasColumnType("int");
 
                     b.Property<int>("Area")
@@ -408,8 +410,7 @@ namespace BuyHouse.Migrations
                     b.HasOne("BuyHouse.Data.Models.Agent", "Agent")
                         .WithMany("Properties")
                         .HasForeignKey("AgentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("BuyHouse.Data.Models.Category", "Category")
                         .WithMany("Properties")

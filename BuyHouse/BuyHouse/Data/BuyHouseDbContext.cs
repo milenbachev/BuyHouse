@@ -25,7 +25,7 @@
             builder.Entity<Property>()
                 .HasOne(x => x.Category)
                 .WithMany(x => x.Properties)
-                .HasForeignKey(x => x.CategotyId)
+                .HasForeignKey(x => x.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Property>()

@@ -16,7 +16,7 @@
         <h2 class="heading-margin text-center">Property Details</h2>
         <img class="card-img-top" src="@Model.ImageUrl" alt="@Model.Title  - @Model.Year (@Model.City)">
         <div class="card-body">
-            <h5 class="card-title text-center">@Model.Transaction - @Model.Title</h5>
+            <h5 class="card-title text-center">@Model.TypeOfTransaction - @Model.Title</h5>
             <h4 class="card-title text-left">Price : @Model.Price EUR</h4>
             <p class="card-title text-left">City - @Model.City ; Year - @Model.Year</p>
             <p class="card-title text-left">Area - @Model.Area sq m</p>
@@ -33,6 +33,7 @@
                 <p class="card-title text-left">Bath - @Model.Bath</p>
             }
             <p class="card-title text-left">Construction - @Model.Construction</p>
+            <h6 class="card-text text-left">Category - @Model.CategoryName</h6>
             <hr />
             <p class="card-title text-left">Description - @Model.Description</p>
             <a asp-controller="Properties" asp-action="All" class="btn btn-primary">Back</a>

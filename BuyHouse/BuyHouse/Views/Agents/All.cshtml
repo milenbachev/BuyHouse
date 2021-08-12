@@ -36,14 +36,14 @@
         previousPage = 1;
     }
 
-    var maxPage = (int)Math.Ceiling((double)Model.TotalAgents / AllPropertyModel.PropertyPerPage);
+    var maxPage = (int)Math.Ceiling((double)Model.TotalAgents / AllAgentModel.ObjectPerPage);
 
 }
 <nav aria-label="...">
     <ul class="pagination justify-content-center">
         <li class="page-item">
             <a class="btn btn-info @(Model.CurentPage == 1 ? "disabled" : string.Empty)"
-               asp-controller="Properties"
+               asp-controller="Agents"
                asp-action="All"
                asp-route-curentPage="@previousPage">Previous</a>
         </li>
@@ -53,7 +53,7 @@
 
         <li class="page-item">
             <a class="btn btn-info @(Model.CurentPage == maxPage ? "disabled" : string.Empty)"
-               asp-controller="Properties"
+               asp-controller="Agents"
                asp-action="All"
                asp-route-curentPage="@(Model.CurentPage + 1)">Next</a>
         </li>

@@ -19,7 +19,7 @@
             string typeOfTransaction,
             string city,
             string construction,
-            int? agentId);
+            int agentId);
 
         PropertyServiceQueryModel All(
             string transaction,
@@ -51,7 +51,7 @@
 
         IEnumerable<PropertyServiceListModel> AgentProperties(string userId);
 
-        IEnumerable<PropertyServiceListModel> CurentAgentProperties(int? id);
+        IEnumerable<PropertyServiceListModel> CurentAgentProperties(int id);
 
         IEnumerable<PropertyCategoryServiceModel> AllCategory();
 

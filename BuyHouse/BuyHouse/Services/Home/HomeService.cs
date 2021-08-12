@@ -1,5 +1,7 @@
 ﻿namespace BuyHouse.Services.Home
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using BuyHouse.Data;
     using BuyHouse.Models.Home;
     using System.Collections.Generic;
@@ -8,10 +10,12 @@
     public class HomeService : IHomeService
     {
         private readonly BuyHouseDbContext data;
+        private readonly IMapper mapper;
 
-        public HomeService(BuyHouseDbContext data)
+        public HomeService(BuyHouseDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public IndexViewModel GetCounts()
@@ -36,16 +40,8 @@
                 .Properties
                 .OrderByDescending(x => x.Id)
                 .Take(3)
-                .Select(x => new PropertyViewModel
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    ImageUrl = x.ImageUrl,
-                    City = x.City,
-                })
-                .ToList();
-                
-
+                .ProjectTo<PropertyViewModel>(this.mapper.ConfigurationProvider)
+                .ToList();     
         }
     }
 }
