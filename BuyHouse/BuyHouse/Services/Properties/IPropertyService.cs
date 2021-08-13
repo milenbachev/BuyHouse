@@ -22,11 +22,11 @@
             int agentId);
 
         PropertyServiceQueryModel All(
-            string transaction = null,
-            string city = null,
-            string construction = null,
-            int curentPage = 1,
-            int propertyPerPage = 5,
+            string transaction,
+            string city,
+            string construction,
+            int curentPage,
+            int propertyPerPage,
             bool publicOnly = true);
 
         PropertyDetailsServiceModel Details(int id);

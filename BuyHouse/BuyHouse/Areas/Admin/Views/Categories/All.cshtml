@@ -6,28 +6,29 @@
 
 <h2 class="text-center">All Categories</h2>
 
-<table class="table mt-5">
-    <thead>
+<table class="table table-striped">
+    <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
             <th scope="col">Category Name</th>
             <th scope="col"></th>
         </tr>
     </thead>
-    @foreach (var category in Model.Categories)
-    {
-        <tbody>
+    <tbody>
+        @foreach (var category in Model.Categories)
+        {
             <tr>
                 <th scope="row">@category.Id</th>
-                <td >@category.Name</td>
+                <td>@category.Name</td>
                 <td>
                     <a asp-area="Admin" asp-controller="Categories" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger float-right ml-3">Delete</a>
                     <a asp-area="Admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-warning float-right ml-3">Edit</a>
                 </td>
             </tr>
-        </tbody>
-    }
+        }
+    </tbody>
 </table>
+
 <hr />
 
 @{
@@ -52,7 +53,6 @@
         <li class="page-item active">
             <a class="page-link">@Model.CurentPage<span class="sr-only">(current)</span></a>
         </li>
-
         <li class="page-item">
             <a class="btn btn-info @(Model.CurentPage == maxPage ? "disabled" : string.Empty)"
                asp-controller="Categories"

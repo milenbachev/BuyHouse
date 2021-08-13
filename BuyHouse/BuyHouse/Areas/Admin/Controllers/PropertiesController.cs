@@ -1,5 +1,6 @@
 ﻿namespace BuyHouse.Areas.Admin.Controllers
 {
+    using BuyHouse.Models.Properties;
     using BuyHouse.Services.Properties;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,23 @@
         {
             this.service = service;
         }
-        public IActionResult All() 
+        public IActionResult All([FromQuery] AllPropertyModel property) 
         {
-            var properties = this.service.All(publicOnly: false);
-            
-            return this.View(properties);
+            var queryProperties = this.service.All(
+                property.Transaction,
+                property.City,
+                property.Construction,
+                property.CurentPage,
+                AllPropertyModel.ObjectPerPage,
+                publicOnly: false);
+
+            var propertiesCity = this.service.AllCity();
+
+            property.TotalProperties = queryProperties.TotalProperties;
+            property.Cities = propertiesCity;
+            property.Properties = queryProperties.Properties;
+
+            return this.View(property);
         }
 
         public IActionResult Approve(int id) 
