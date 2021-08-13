@@ -4,14 +4,16 @@ using BuyHouse.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BuyHouse.Migrations
 {
     [DbContext(typeof(BuyHouseDbContext))]
-    partial class BuyHouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210813111559_AddUserTableIsAgent")]
+    partial class AddUserTableIsAgent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

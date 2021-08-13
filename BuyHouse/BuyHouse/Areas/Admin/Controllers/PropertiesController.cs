@@ -11,6 +11,8 @@
     [Authorize(Roles = AdministratolRoleName)]
     public class PropertiesController : Controller
     {
+        private const int propertiesPerPage = 5;
+
         private readonly IPropertyService service;
 
         public PropertiesController(IPropertyService service) 
@@ -24,7 +26,7 @@
                 property.City,
                 property.Construction,
                 property.CurentPage,
-                AllPropertyModel.ObjectPerPage,
+                propertiesPerPage,
                 publicOnly: false);
 
             var propertiesCity = this.service.AllCity();

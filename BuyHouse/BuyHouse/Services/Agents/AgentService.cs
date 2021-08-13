@@ -32,8 +32,14 @@
                 Description = description,
                 ImageUrl = imageUrl,
                 City = city,
-                UserId = userId
+                UserId = userId,
             };
+
+            var user = this.data
+                .Users
+                .FirstOrDefault(x => x.Id == agent.UserId);
+
+            user.IsAgent = true;
 
             this.data.Agents.Add(agent);
             this.data.SaveChanges();

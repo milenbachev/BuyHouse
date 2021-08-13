@@ -9,5 +9,7 @@
     {
         [MaxLength(FullNameMaxLength)]
         public string FullName { get; set; }
+
+        public bool IsAgent { get; set; }
     }
 }

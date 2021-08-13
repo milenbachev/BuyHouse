@@ -1,0 +1,74 @@
+﻿@model AllUserModel
+
+
+@{
+    ViewData["Title"] = $"All User, Page {Model.CurentPage}";
+    var index = 1;
+}
+
+<h2 class="text-center">All Users</h2>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Name</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">User is Agent</th>
+            <th scope="col"></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <th scope="row">@(index)</th>
+                <td>@user.UserName</td>
+                <td>@user.FullName</td>
+                <td>@(user.IsAgent ? "Yes" : "No")</td>
+                <td>
+                    @if (user.IsAgent)
+                    {
+                        <a asp-area="Admin" asp-controller="Agents" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning float-right ml-3">Edit</a>
+                        <a asp-area="" asp-controller="Agents" asp-action="Details" asp-route-id="@user.Id" class="btn btn-primary float-right ml-3">Details</a>
+                    }
+                </td>
+            </tr>
+            index += 1;
+        }
+    </tbody>
+</table>
+<hr />
+
+@{
+    var previousPage = Model.CurentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = (int)Math.Ceiling((double)Model.TotalUsers / Model.UserPerPage);
+
+}
+
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="btn btn-info @(Model.CurentPage == 1 ? "disabled" : string.Empty)"
+               asp-controller="Users"
+               asp-action="All"
+               asp-route-curentPage="@previousPage">Previous</a>
+        </li>
+        <li class="page-item active">
+            <a class="page-link">@Model.CurentPage<span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="page-item">
+            <a class="btn btn-info @(Model.CurentPage == maxPage ? "disabled" : string.Empty)"
+               asp-controller="Users"
+               asp-action="All"
+               asp-route-curentPage="@(Model.CurentPage + 1)">Next</a>
+        </li>
+    </ul>
+</nav>
+
