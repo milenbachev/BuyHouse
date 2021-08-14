@@ -1,17 +1,20 @@
 ﻿namespace BuyHouse.Areas.Admin.Services.Categories
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using BuyHouse.Data;
     using BuyHouse.Data.Models;
-    using System.Collections.Generic;
     using System.Linq;
 
     public class CategoryService : ICategoryService
     {
         private readonly BuyHouseDbContext data;
+        private readonly IMapper mapper;
 
-        public CategoryService(BuyHouseDbContext data) 
+        public CategoryService(BuyHouseDbContext data, IMapper mapper) 
         {
             this.data = data;
+            this.mapper = mapper;
         }
         public int Create(string name)
         {
@@ -39,11 +42,7 @@
 
             var category = this.data
                 .Categories
-                .Select(x => new CategoryServiceListModel
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                })
+                .ProjectTo<CategoryServiceListModel>(this.mapper.ConfigurationProvider)
                 .Skip((curentPage - 1) * categoryPerPage)
                 .Take(categoryPerPage)
                 .ToList();
@@ -78,10 +77,7 @@
             var category = this.data
                 .Categories
                 .Where(x => x.Id == id)
-                .Select(x => new CategoryServiceListModel
-                {
-                    Name = x.Name
-                })
+                .ProjectTo<CategoryServiceListModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefault();
 
             return category;

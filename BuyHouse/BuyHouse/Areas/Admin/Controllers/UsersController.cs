@@ -2,7 +2,6 @@
 {
     using BuyHouse.Areas.Admin.Models.Users;
     using BuyHouse.Areas.Admin.Services.Users;
-    using BuyHouse.Services.Agents;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

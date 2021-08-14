@@ -1,9 +1,12 @@
 ﻿@model AllUserModel
 
+@inject IAgentService Agent
+@inject IPropertyService Property 
 
 @{
     ViewData["Title"] = $"All User, Page {Model.CurentPage}";
     var index = 1;
+
 }
 
 <h2 class="text-center">All Users</h2>
@@ -29,8 +32,12 @@
                 <td>
                     @if (user.IsAgent)
                     {
-                        <a asp-area="Admin" asp-controller="Agents" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning float-right ml-3">Edit</a>
-                        <a asp-area="" asp-controller="Agents" asp-action="Details" asp-route-id="@user.Id" class="btn btn-primary float-right ml-3">Details</a>
+                        @if (!Property.AgentProperties(user.Id).Any())
+                        {
+                            <a asp-area="Admin" asp-controller="Agents" asp-action="Delete" asp-route-id="@Agent.AgentsId(user.Id)" class="btn btn-danger float-right ml-3">Delete</a>
+                        }
+                        <a asp-area="Admin" asp-controller="Agents" asp-action="Edit" asp-route-id="@Agent.AgentsId(user.Id)" class="btn btn-warning float-right ml-3">Edit</a>
+                        <a asp-area="" asp-controller="Agents" asp-action="Details" asp-route-id="@Agent.AgentsId(user.Id)" class="btn btn-primary float-right ml-3">Details</a>
                     }
                 </td>
             </tr>

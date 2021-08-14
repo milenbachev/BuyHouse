@@ -8,5 +8,7 @@
             string description,
             string imageUrl,
             string city);
+
+        bool Delete(int id);
     }
 }

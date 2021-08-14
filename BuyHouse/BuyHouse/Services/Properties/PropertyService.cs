@@ -204,11 +204,7 @@
         {
             return this.data
                 .Categories
-                .Select(x => new PropertyCategoryServiceModel
-                {
-                    Id = x.Id,
-                    Name = x.Name
-                })
+                .ProjectTo<PropertyCategoryServiceModel>(this.mapper.ConfigurationProvider)
                 .ToList();
         }
 
