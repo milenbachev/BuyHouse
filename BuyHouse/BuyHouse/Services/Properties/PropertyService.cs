@@ -171,6 +171,16 @@
                 return false;
             }
 
+            var propertyWithIssue = this.data
+                .Issues
+                .Where(x => x.PropertyId == property.Id);
+
+
+            if (propertyWithIssue.Any()) 
+            {
+                return false;
+            }
+
             this.data.Properties.Remove(property);
             this.data.SaveChanges();
 
