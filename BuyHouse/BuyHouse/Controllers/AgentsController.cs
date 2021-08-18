@@ -68,6 +68,11 @@
             var agent = this.agentService
                 .Details(id);
 
+            if (agent == null) 
+            {
+                return this.NotFound();
+            }
+
             return this.View(agent);
         }
     }
