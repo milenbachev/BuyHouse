@@ -1,12 +1,8 @@
 ﻿namespace BuyHouseTest.Controllers
 {
     using BuyHouse.Controllers;
-    using BuyHouse.Data.Models;
     using BuyHouse.Models.Agents;
-    using BuyHouse.Services.Agents;
     using MyTested.AspNetCore.Mvc;
-    using System.Collections.Generic;
-    using System.Linq;
     using Xunit;
 
     public class AgentsControllerTest
